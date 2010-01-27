@@ -1,0 +1,9 @@
+--- 
+permalink: /:year/:month/:day/:title
+lsi: false
+markdown: maruku
+pygments: true
+comments: true
+pretty_style: html_extension
+auto: true
+server_port: 4000
