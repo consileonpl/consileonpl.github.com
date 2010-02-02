@@ -69,6 +69,10 @@ ol, ul {
   color: black;
 }
 
+.black {
+  color: 475258;
+}
+
 #main {
   clear: both;
 }
