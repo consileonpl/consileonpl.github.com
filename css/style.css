@@ -50,11 +50,11 @@ ol, ul {
 
 #logo {
   float: left;
-  width: 200px;
+  width: 205px;
   height: 100px;
   background-image: url("/images/logo2.png");
   background-repeat: no-repeat;
-  background-position: 100px 0px;
+  background-position: 105px 0px;
 }
 
 #header h2 a {
