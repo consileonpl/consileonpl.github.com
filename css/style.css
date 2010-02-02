@@ -1,0 +1,148 @@
+body {
+  background: none repeat scroll 0 0 #ffffff;
+  color: #333333;
+  font: 62% Helvetica, Arial, sans-serif;
+  overflow-y: scroll;
+}
+
+a {
+  color: #7CA300;
+  text-decoration: none;
+}
+
+p {
+  font-size: 1.4em;
+  line-height: 1.55em;
+  margin-bottom: 1.35em;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ol, ul {
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+}
+
+#container {
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 880px;
+}
+
+#header {
+  padding: 20px 0 0px;
+  position: relative;
+}
+
+#header h1 a {
+  display: block;
+  font-size: 4.8em;
+  font-weight: bold;
+  height: 40px;
+  letter-spacing: -0.05em;
+  line-height: 1em;
+  padding: 16px 0 0 240px;
+  text-decoration: none;
+}
+
+#logo {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-image: url("/images/logo2.png");
+  background-repeat: no-repeat;
+  background-position: 100px 0px;
+}
+
+#header h2 a {
+  margin-top: 10px;
+  display: block;
+  font-size: 1.6em;
+  font-weight: bold;
+  height: 60px;
+  line-height: 1em;
+  padding: 0 0 0 240px;
+  text-decoration: none;
+  letter-spacing: 0.3em;
+  color: black;
+}
+
+#main {
+  clear: both;
+}
+
+#content {
+  float: right;
+  margin-left: 25px;
+  padding: 0 15px;
+  width: 625px;
+}
+
+#sidebar {
+  float: right;
+  text-align: right;
+  width: 180px;
+}
+
+#sidebar h3 {
+  font-size: 1.9em;
+  font-weight: normal;
+  line-height: 1.5em;
+}
+
+#sidebar ul {
+  margin-bottom: 1.2em;
+
+}
+
+#sidebar li {
+  font-size: 1.6em;
+  margin-bottom: 0.2em;
+  list-style-type: ;
+}
+
+#sidebar li a:before {
+  content: "\00BB \0020";
+}
+
+#footer {
+  clear: both;
+  padding-bottom: 2.5em;
+  padding-left: 240px;
+  padding-right: 0;
+  padding-top: 1em;
+}
+
+#footer li {
+  border-right-color: #c8c8c8;
+  border-right-style: solid;
+  border-right-width: 1px;
+  display: inline;
+  font-size: 1.6em;
+  line-height: 1em;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 0;
+}
+
+#footer li:last-child {
+  border-right-style: none;
+}
+
+#content h1 {
+  margin-bottom: 0.2em;
+  font-size: 2.9em;
+  font-weight: normal;
+  line-height: 1.1em;
+}
+
+#content h2 {
+  font-size: 1.6em;
+  font-weight: bold;
+  line-height: 1.3em;
+  margin-bottom: 1.4em;
+}

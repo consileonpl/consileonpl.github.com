@@ -1,6 +1,16 @@
----                                                                                                           
-layout: post                                                                                                  
-title: Testing                                                       
-categories: [git]                                                                                    
----                                                                                                           
-Testing Post.
+---
+layout: post
+title: Cucumber - ogórek, ogórek... zielony ma garniturek
+categories: [rubyonrails, git]
+---
+[Introduction to Outside-in Development with Cucumber](http://vimeo.com/6563331) from [Eric Berry](http://vimeo.com/berry) on [Vimeo](http://vimeo.com).
+
+{% assign vimeo = "6563331" %}                                                                                              
+{% include vimeo.html %}
+  
+  
+Lektura obowiązkowa:  
+[http://cukes.info/](http://cukes.info/)  
+[http://asciicasts.com/episodes/155-beginning-with-cucumber](http://asciicasts.com/episodes/155-beginning-with-cucumber)  
+[http://asciicasts.com/episodes/159-more-on-cucumber](http://asciicasts.com/episodes/159-more-on-cucumber)  
+
