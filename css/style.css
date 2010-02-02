@@ -11,7 +11,7 @@ a {
 }
 
 p {
-  font-size: 1.4em;
+  font-size: 1.8em;
   line-height: 1.55em;
   margin-bottom: 1.35em;
 }
@@ -48,7 +48,8 @@ ol, ul {
   text-decoration: none;
 }
 
-#logo {
+#logo a {
+  display: block;
   float: left;
   width: 205px;
   height: 100px;
@@ -57,7 +58,7 @@ ol, ul {
   background-position: 105px 0px;
 }
 
-#logo:hover {
+#logo a:hover a {
   -moz-transform: rotate(360deg);
 }
 
@@ -144,7 +145,7 @@ ol, ul {
 }
 
 #content h2 {
-  font-size: 1.6em;
+  font-size: 1.9em;
   font-weight: bold;
   line-height: 1.3em;
   margin-bottom: 1.4em;
