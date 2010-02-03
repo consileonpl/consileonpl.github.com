@@ -1,7 +1,7 @@
 body {
   background: none repeat scroll 0 0 #ffffff;
   color: #333333;
-  font: 62% Helvetica, Arial, sans-serif;
+  font: 62% "ff-dagny-web-pro-1","ff-dagny-web-pro-2",Palatino, georgia, "times new roman", serif;
   overflow-y: scroll;
 }
 
@@ -138,7 +138,7 @@ ol, ul {
 }
 
 #content h1 {
-  margin-bottom: 0.2em;
+  margin-bottom: 0.4em;
   font-size: 2.9em;
   font-weight: normal;
   line-height: 1.1em;
@@ -150,3 +150,18 @@ ol, ul {
   line-height: 1.3em;
   margin-bottom: 1.4em;
 }
+
+/* @group FancyFirst */
+ .content h1 + p:first-letter {
+ font-size: 48px;
+ padding: 0 0.15em 0 0;
+ margin: 0.05em 0 -0.15em 0;
+ line-height: 1em;
+ float: left;
+}
+
+.content h1 + p:first-line {
+ font-variant: small-caps;
+ font-size: larger;
+}
+/* @end */
