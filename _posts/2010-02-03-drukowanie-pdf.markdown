@@ -26,7 +26,7 @@ w przypadku mojego systemu operacyjnego(Mac OSX) wygląda to następująco:
 {% highlight bash %}
 $ wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.9.1-OS-X.i368
 $ sudo mv wkhtmltopdf-0.9.1-OS-X.i368 /opt/local/bin/wkhtmltopdf
-$ sudo chmod +x wkhtmltopdf
+$ sudo chmod +x /opt/local/bin/wkhtmltopdf
 {% endhighlight %}
   
 możemy oczywiście przetestować funkcjonowanie tego programu:
