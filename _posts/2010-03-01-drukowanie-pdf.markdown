@@ -78,5 +78,5 @@ Lektura obowiązkowa:
 [http://github.com/mileszs/wicked_pdf](http://github.com/mileszs/wicked_pdf)  
 [http://code.google.com/p/wkhtmltopdf/](http://code.google.com/p/wkhtmltopdf/)
 
-Referencje:
+Referencje:  
 [andrzejsliwa.com](http://andrzejsliwa.com/2010/03/01/drukowanie-pdf/)
