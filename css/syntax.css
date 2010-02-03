@@ -1,0 +1,56 @@
+.s1, .s2, .sx, .mi {
+  color: #91BB9E;
+}
+
+.nb {
+  color: #FB9A4B; font-style: italic;
+}
+
+.k, .o {
+  color: #96DD3B;
+}
+
+.ss {
+  color: rgb(255, 207, 135);
+}
+
+.vi {
+  color: #FB9A4B;
+}
+
+.c, .c1 {
+  color: #5c0016;
+}
+
+.no {
+  color: #9DF39F;
+}
+
+.kp, .ss {
+  color: #498968;
+}
+
+.highlight {
+  margin-top: -0.3em;
+}
+
+code {
+  font-family: Monaco, monospace;
+}
+
+pre {
+  font: 1.3em Monaco, monospace;
+  line-height: 1.4em;
+  display: block;
+  color: white;
+  background: #475258;
+  -moz-border-radius: 0.3em;
+  -webkit-border-radius: 0.3em;
+  padding: 0.6em;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  margin-bottom: 20px;
+}
