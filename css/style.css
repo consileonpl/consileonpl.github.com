@@ -165,3 +165,25 @@ ol, ul {
  font-size: larger;
 }
 /* @end */
+
+.meta a {
+  font-size: 1.9em;
+  line-height: 1.3em;
+  margin-bottom: 1.4em;
+}
+
+.meta {
+  margin-bottom: 2em;
+}
+
+#entries {
+  font-size: 0.8em;
+  margin-bottom: 4em;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  padding-bottom: 4em;
+}
+
+#entries a {
+  font-size: 2.8em;
+}

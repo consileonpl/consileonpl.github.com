@@ -78,5 +78,4 @@ Lektura obowiązkowa:
 [http://github.com/mileszs/wicked_pdf](http://github.com/mileszs/wicked_pdf)  
 [http://code.google.com/p/wkhtmltopdf/](http://code.google.com/p/wkhtmltopdf/)
 
-Autor:  
-[Andrzej Śliwa](http://andrzejsliwa.com)
+Autor: [Andrzej Śliwa](http://andrzejsliwa.com)
