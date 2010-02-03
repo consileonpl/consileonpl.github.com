@@ -2,6 +2,8 @@
 layout: post
 title: Cucumber - ogórek, ogórek... zielony ma garniturek
 categories: [rubyonrails, git]
+author: Andrzej Sliwa
+ref: http://andrzejsliwa.com
 ---
 [Introduction to Outside-in Development with Cucumber](http://vimeo.com/6563331) from [Eric Berry](http://vimeo.com/berry) on [Vimeo](http://vimeo.com).
 
@@ -14,3 +16,5 @@ Lektura obowiązkowa:
 [http://asciicasts.com/episodes/155-beginning-with-cucumber](http://asciicasts.com/episodes/155-beginning-with-cucumber)  
 [http://asciicasts.com/episodes/159-more-on-cucumber](http://asciicasts.com/episodes/159-more-on-cucumber)  
 
+Autor:  
+[Andrzej Śliwa](http://andrzejsliwa.com)
