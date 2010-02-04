@@ -50,7 +50,7 @@ $ script/plugin install git://github.com/mileszs/wicked_pdf.git
 
 tak zainstalowany plugin można bez problemu wykorzystać w następujący sposób:
 
-{% highlight rhtml %}
+{% highlight html %}
 # GET /pages/1
 # GET /pages/1.xml
 def show
@@ -70,7 +70,7 @@ end
 
 generowanie linków dla dokumentów pdf może wyglądać następująco:
 
-{% highlight ruby %}
+{% highlight html %}
 <%= link_to "PDF", page_path(@page, :format => 'pdf'), :target => "_blank"%>
 {% endhighlight %}
 
