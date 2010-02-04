@@ -23,7 +23,7 @@ Instalacja rozwiązania polega na zainstalowaniu wkhtmltopdf (ze źródeł, bąd
 
 w przypadku mojego systemu operacyjnego(Mac OSX) wygląda to następująco:
 
-{% highlight Bash Session %}
+{% highlight console %}
 $ wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.9.1-OS-X.i368
 $ sudo mv wkhtmltopdf-0.9.1-OS-X.i368 /opt/local/bin/wkhtmltopdf
 $ sudo chmod +x /opt/local/bin/wkhtmltopdf
@@ -31,19 +31,19 @@ $ sudo chmod +x /opt/local/bin/wkhtmltopdf
   
 możemy oczywiście przetestować funkcjonowanie tego programu:
 
-{% highlight Bash Session %}
+{% highlight console %}
 $ wkhtmltopdf www.google.pl google.pdf
 {% endhighlight %}
 
 lub
 
-{% highlight Bash Session %}
+{% highlight console %}
 $ wkhtmltopdf file:///Users/andrzejsliwa/Desktop/test.html test.pdf
 {% endhighlight %}
 
 następnie instalujemy sam plugin:
 
-{% highlight bash %}
+{% highlight console %}
 $ script/plugin install git://github.com/mileszs/wicked_pdf.git
 {% endhighlight %}
   
@@ -70,7 +70,7 @@ end
 
 generowanie linków dla dokumentów pdf może wyglądać następująco:
 
-{% highlight Erb %}
+{% highlight erb %}
 <%= link_to "PDF", page_path(@page, :format => 'pdf'), :target => "_blank"%>
 {% endhighlight %}
 
