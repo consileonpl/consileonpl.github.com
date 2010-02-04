@@ -50,7 +50,7 @@ $ script/plugin install git://github.com/mileszs/wicked_pdf.git
 
 tak zainstalowany plugin można bez problemu wykorzystać w następujący sposób:
 
-{% highlight html %}
+{% highlight ruby %}
 # GET /pages/1
 # GET /pages/1.xml
 def show
