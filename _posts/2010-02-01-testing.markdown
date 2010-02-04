@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Cucumber - ogórek, ogórek... zielony ma garniturek
-categories: [rubyonrails, git]
+categories: [rubyonrails, cucumber, testowanie]
 author: Andrzej Sliwa
 ref: http://andrzejsliwa.com
 ---
