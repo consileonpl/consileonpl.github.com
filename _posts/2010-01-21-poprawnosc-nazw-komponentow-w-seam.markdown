@@ -4,7 +4,7 @@ title: Poprawność nazw komponentów w Seam
 description: Jakie są ograniczenia co do poprawnej nazwy komponentu w Seam-ie
 categories: [seam, java]
 ---
-Ostatnio jakoś tak natchnęło mnie na eksperymentowanie (związane również z wymyślaniem pytań na <a href="http://www.javablackbelt.com/Home.wwa">JavaBlackBelt</a>). Zastanowiło mnie jak właściwie powinna wyglądać prawidłowa nazwa komponentu <a href="http://seamframework.org/">Seam</a>. Czy są jakieś ograniczenia co do znaków? Intuicja podpowiada mi, że są (podpowiada nawet jakie to mogą być ograniczenia), jednakże moja intuicja potrafi być zawodna toteż postanowiłem przeglądnąć co na ten temat mówi dokumentacja.
+Ostatnio jakoś tak natchnęło mnie na eksperymentowanie (związane również z wymyślaniem pytań na [JavaBlackBelt](http://www.javablackbelt.com/Home.wwa)). Zastanowiło mnie jak właściwie powinna wyglądać prawidłowa nazwa komponentu [Seam](http://seamframework.org/). Czy są jakieś ograniczenia co do znaków? Intuicja podpowiada mi, że są (podpowiada nawet jakie to mogą być ograniczenia), jednakże moja intuicja potrafi być zawodna toteż postanowiłem przeglądnąć co na ten temat mówi dokumentacja.
 
 Zacząłem od przeglądu dokumentacji online. Oficjalna [strona](http://docs.jboss.com/seam/latest/reference/en-US/html/concepts.html#d0e3886), mówi mi tylko, że nazwę komponentu mogę nadać za pomocą adnotacji `@Name`. No to zerkam do jej [javadoc-a](http://docs.jboss.org/seam/2.2.0.GA/api/). Tutaj informacji jeszcze mniej. Dowiadujemy się tylko, że adnotacja ta nadaje nazwę komponentu, ale w jakim celu, jak powinna wyglądać prawidłowa nazwa i do czego ją wykorzystywać ani słowa!
 
