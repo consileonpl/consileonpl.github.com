@@ -21,17 +21,17 @@ public class TestComponent {
 Deploy, uruchamianie serwera i dostaję:
 
 {% highlight java %}
-java.lang.RuntimeException: Could not create Component: !@#$%^*()component                                                                                                                                                                  
-        at org.jboss.seam.init.Initialization.addComponent(Initialization.java:1202)                                                                                                                                                         
-        at org.jboss.seam.init.Initialization.installComponents(Initialization.java:1118)                                                                                                                                                    
-        at org.jboss.seam.init.Initialization.init(Initialization.java:733)                                                                                                                                                                  
-        at org.jboss.seam.servlet.SeamListener.contextInitialized(SeamListener.java:36)                                                                                                                                                      
-        ...                                                                                                                                                                                         
-Caused by: java.lang.IllegalStateException: not a valid Seam component name: !@#$%^*()component                                                                                                                                             
-        at org.jboss.seam.Component.checkName(Component.java:266)                                                                                                                                                                            
-        at org.jboss.seam.Component.<init>(Component.java:220)                                                                                                                                                                               
-        at org.jboss.seam.Component.<init>(Component.java:205)                                                                                                                                                                               
-        at org.jboss.seam.init.Initialization.addComponent(Initialization.java:1186)                                                                                                                                                         
+java.lang.RuntimeException: Could not create Component: !@#$%^*()component
+        at org.jboss.seam.init.Initialization.addComponent(Initialization.java:1202)
+        at org.jboss.seam.init.Initialization.installComponents(Initialization.java:1118)
+        at org.jboss.seam.init.Initialization.init(Initialization.java:733)
+        at org.jboss.seam.servlet.SeamListener.contextInitialized(SeamListener.java:36)
+        ...
+Caused by: java.lang.IllegalStateException: not a valid Seam component name: !@#$%^*()component
+        at org.jboss.seam.Component.checkName(Component.java:266)
+        at org.jboss.seam.Component.<init>(Component.java:220)
+        at org.jboss.seam.Component.<init>(Component.java:205)
+        at org.jboss.seam.init.Initialization.addComponent(Initialization.java:1186)
         ... 72 more
 {% endhighlight %}
 
