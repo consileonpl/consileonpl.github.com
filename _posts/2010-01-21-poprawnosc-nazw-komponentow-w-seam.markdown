@@ -67,6 +67,6 @@ Niestety dokumentacyjne niedbalstwo jest wszechobecne w frameworkach spod stajni
 Ja już się przyzwyczaiłem, że klasy i metody w Seam są bardzo słabo (o ile w ogóle) udokumentowane, jednakże źle to świadczy o twórcach tego frameworka. Jako coś co ma być wykorzystywane głównie ze względu na swoje API nie może posiadać nieudokumentowanego API!
   
 
-Ref: [http://michalorman.pl/blog/2010/01/poprawnosc-nazw-komponentow-w-seam/](http://michalorman.pl/blog/2010/01/poprawnosc-nazw-komponentow-w-seam/)
+[http://michalorman.pl/blog/2010/01/poprawnosc-nazw-komponentow-w-seam/](http://michalorman.pl/blog/2010/01/poprawnosc-nazw-komponentow-w-seam/)
 
 {% include bio_michal_orman.html %}

@@ -78,6 +78,6 @@ Lektura obowiązkowa:
 [http://github.com/mileszs/wicked_pdf](http://github.com/mileszs/wicked_pdf)  
 [http://code.google.com/p/wkhtmltopdf/](http://code.google.com/p/wkhtmltopdf/)
 
-Ref: [http://andrzejsliwa.com/2010/02/03/drukowanie-pdf/](http://andrzejsliwa.com/2010/02/03/drukowanie-pdf/)
+[http://andrzejsliwa.com/2010/02/03/drukowanie-pdf/](http://andrzejsliwa.com/2010/02/03/drukowanie-pdf/)
 
 {% include bio_andrzej_sliwa.html %}
