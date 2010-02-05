@@ -16,5 +16,6 @@ Lektura obowiązkowa:
 [http://asciicasts.com/episodes/155-beginning-with-cucumber](http://asciicasts.com/episodes/155-beginning-with-cucumber)  
 [http://asciicasts.com/episodes/159-more-on-cucumber](http://asciicasts.com/episodes/159-more-on-cucumber)  
 
-Autor: [Andrzej Śliwa](http://andrzejsliwa.com)
 Ref: [http://andrzejsliwa.com/2010/02/03/drukowanie-pdf/](http://andrzejsliwa.com/2010/02/03/drukowanie-pdf/)
+
+{% include bio_andrzej_sliwa.html %}
