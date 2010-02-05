@@ -1,49 +1,40 @@
 .s1, .s2, .sx, .mi {
-  color: #91BB9E;
+color:#91BB9E;
 }
-
 .nb {
-  color: #FB9A4B; font-style: italic;
+color:#FB9A4B;
+font-style:italic;
 }
-
 .k, .o {
-  color: #96DD3B;
+color:#96DD3B;
 }
-
 .ss {
-  color: rgb(255, 207, 135);
+color:#FFCF87;
 }
-
 .vi {
-  color: #FB9A4B;
+color:#FB9A4B;
 }
-
 .c, .c1 {
-  color: #5c0016;
+color:#245032;
 }
-
 .no {
-  color: #9DF39F;
+color:#9DF39F;
 }
-
 .kp, .ss {
-  color: #498968;
+color:#497958;
 }
 
-.highlight {
-  margin-top: -0.3em;
-}
 
 code {
   font-family: Monaco, monospace;
 }
 
 pre {
-  font: 1.3em Monaco, monospace;
+  font: 1.5em Monaco, monospace;
   line-height: 1.4em;
   display: block;
   color: white;
-  background: #475258;
+  background: #202020;
   -moz-border-radius: 0.3em;
   -webkit-border-radius: 0.3em;
   padding: 0.6em;

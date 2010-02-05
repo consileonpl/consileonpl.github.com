@@ -91,10 +91,15 @@ ol, ul {
   width: 180px;
 }
 
+#sidebar a {
+  font-weight: bold;
+}
+
 #sidebar h3 {
   font-size: 1.9em;
   font-weight: normal;
   line-height: 1.5em;
+  margin-bottom: 0.2em;
 }
 
 #sidebar ul {
@@ -138,6 +143,14 @@ ol, ul {
 }
 
 #content h1 {
+  border-bottom-color:#DDDDDD;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2",Palatino,georgia,"times new roman",serif;
+  font-size:1.8em;
+  font-weight:100;
+  line-height:1.2em;
+  padding-bottom: 0.4em;
   margin-bottom: 0.4em;
   font-size: 2.9em;
   font-weight: normal;
@@ -145,6 +158,14 @@ ol, ul {
 }
 
 #content h2 {
+  border-bottom-color:#DDDDDD;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2",Palatino,georgia,"times new roman",serif;
+  font-size:1.8em;
+  font-weight:100;
+  line-height:1.2em;
+  
   font-size: 1.9em;
   font-weight: bold;
   line-height: 1.3em;
@@ -174,13 +195,13 @@ ol, ul {
 
 .meta {
   margin-bottom: 2em;
-  border-top-color: #7d7d7d; 
+  border-top-color: #C9C9C9; 
   border-top-style: solid;
   border-top-width: 1px; 
-  border-bottom-color: #7d7d7d; 
+  border-bottom-color: #C9C9C9; 
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  background-color: #c2c2c2;
+  background-color: #F1F1F1;
   padding-top: 1em;
   padding-bottom: 1em;
   padding-left: 1em;
@@ -189,8 +210,9 @@ ol, ul {
 #entries {
   font-size: 0.8em;
   margin-bottom: 4em;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
+  border-bottom-color:#DDDDDD;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
   padding-bottom: 4em;
 }
 
