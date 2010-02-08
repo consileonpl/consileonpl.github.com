@@ -1,7 +1,7 @@
 --- 
 permalink: /:year/:month/:day/:title
 lsi: false
-markdown: maruku
+markdown: rdiscount
 pygments: true
 comments: true
 pretty_style: html_extension
