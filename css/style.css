@@ -221,7 +221,7 @@ ol, ul {
   font-size: 2.8em;
 }
 
-#bio {
+.bio {
   border-top-color: #C9C9C9; 
   border-top-style: solid;
   border-top-width: 1px; 
@@ -229,7 +229,7 @@ ol, ul {
   padding: 20px;
 }
 
-#foto {
+.foto {
   float: left;
   display: block;
   padding: 5px;
@@ -239,9 +239,9 @@ ol, ul {
   border-width: 1px;
 }
 
-#desc {
+.desc {
   float: none;
-  margin: 1em;
+  padding-left: 135px;
 }
 
 #desc p {
