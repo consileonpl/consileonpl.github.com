@@ -209,7 +209,6 @@ ol, ul {
   padding-top: 1em;
   padding-bottom: 1em;
   padding-left: 1em;
-  margin-bottom: 4em;
 }
 
 #entries {
@@ -251,4 +250,8 @@ ol, ul {
 
 #desc p {
   margin-left: 120px;
+}
+
+.post {
+  margin-bottom: 2em;
 }
