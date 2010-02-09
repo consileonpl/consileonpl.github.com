@@ -237,6 +237,7 @@ ol, ul {
   float: left;
   display: block;
   padding: 5px;
+  padding-bottom: 2px;
   background-color: white;
   border-color: #C9C9C9;
   border-style: solid;
