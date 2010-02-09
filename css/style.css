@@ -221,10 +221,6 @@ ol, ul {
   margin-left: 2em;
 }
 
-h1 .title {
-  margin-top: 1em;
-}
-
 #entries a {
   font-size: 2.8em;
 }
@@ -235,6 +231,7 @@ h1 .title {
   border-top-width: 1px; 
   background-color: #F1F1F1;
   padding: 20px;
+  margin-bottom: 2em;
 }
 
 .foto {
