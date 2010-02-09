@@ -221,6 +221,10 @@ ol, ul {
   margin-left: 2em;
 }
 
+h1 .title {
+  margin-top: 1em;
+}
+
 #entries a {
   font-size: 2.8em;
 }
