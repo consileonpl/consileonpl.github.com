@@ -1,8 +1,12 @@
+html {
+  overflow: auto;
+}
+
 body {
   background: none repeat scroll 0 0 #ffffff;
   color: #333333;
   font: 62% "ff-dagny-web-pro-1","ff-dagny-web-pro-2",Palatino, georgia, "times new roman", serif;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 a {
