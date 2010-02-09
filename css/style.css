@@ -209,6 +209,7 @@ ol, ul {
   padding-top: 1em;
   padding-bottom: 1em;
   padding-left: 1em;
+  margin-bottom: 3em;
 }
 
 #entries {
@@ -231,7 +232,6 @@ ol, ul {
   border-top-width: 1px; 
   background-color: #F1F1F1;
   padding: 20px;
-  margin-bottom: 2em;
 }
 
 .foto {
