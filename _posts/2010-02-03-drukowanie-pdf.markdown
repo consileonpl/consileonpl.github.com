@@ -37,6 +37,7 @@ następnie instalujemy sam plugin:
 
 {% highlight console %}
 $ script/plugin install git://github.com/mileszs/wicked_pdf.git
+$ script/generate wicked_pdf
 {% endhighlight %}
   
 
