@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Wieloplatformowe frameworki mobilne - Titanium
-categories: [android]
+categories: [android, framework, mobilne]
 ---
 
 
