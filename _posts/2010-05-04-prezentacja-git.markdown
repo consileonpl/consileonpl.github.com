@@ -8,6 +8,6 @@ W ubiegłym roku miałem przyjemność popełnić prezentacje na temat [GIT](htt
 {% assign parleys = "1890" %}
 {% include parleys.html %}
 
-(http://andrzejsliwa.com/2010/05/04/prezentacja-git/)[http://andrzejsliwa.com/2010/05/04/prezentacja-git/]
+[http://andrzejsliwa.com/2010/05/04/prezentacja-git/](http://andrzejsliwa.com/2010/05/04/prezentacja-git/)
 
 {% include bio_andrzej_sliwa.html %}
