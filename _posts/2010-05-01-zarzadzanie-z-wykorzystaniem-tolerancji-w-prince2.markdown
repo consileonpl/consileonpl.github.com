@@ -2,8 +2,7 @@
 layout: post
 title: Zarządzanie z wykorzystaniem tolerancji w PRINCE2
 description: Jedną z głównych zasad metodyki PRINCE2 jest zarządzanie z wykorzystaniem tolerancji. Przyjrzyjmy się bliżej co też ta zasada oznacza w kontekście zarządzania projektem.
-keywords: zarządzanie z wykorzystaniem tolerancji PRINCE2 pryncypium zasada projects in controlled environment projekty w sterowanym środowisku metodyka
-navbar_pos: 1
+categories: [prince2]
 ---
 Jedną z głównych zasad metodyki PRINCE2 (tzw. pryncypium) jest zarządzanie projektem z wykorzystaniem tolerancji.
 Przyjrzyjmy się dlaczego owa zasada została wprowadzona, co ona oznacza i jakie konsekwencje niesie ze sobą dla

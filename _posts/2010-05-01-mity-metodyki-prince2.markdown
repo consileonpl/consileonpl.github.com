@@ -2,8 +2,7 @@
 layout: post
 title: Mity metodyki PRINCE2
 description: Wokół metodyki PRINCE2 narosło wiele mitów, które przesłaniają prawdziwy obraz tej metodyki. Niniejszy post ma na celu rozwianie niewłaściwych poglądów o PRINCE2.
-keywords: PRINCE2 Projects In a Controlled Environment Projekty w Środowisku Sterowanym Fakty Mity
-navbar_pos: 1
+categories: [prince2]
 ---
 Po skończonym kursie **Zarządzanie projektami metodyką PRINCE2** i niejako w ramach przygotowania do egzaminu PRINCE2 Foundation
 (a w dalszej perspektywie PRINCE2 Practitioner) wdałem się ostatnio w kilka dyskusji na temat tej metodyki. Jedną z nich można
