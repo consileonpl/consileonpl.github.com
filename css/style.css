@@ -256,3 +256,7 @@ ol, ul {
 .post {
   margin-bottom: 5em;
 }
+
+.full {
+  width: 750px;
+}
