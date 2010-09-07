@@ -3,7 +3,6 @@ layout: post
 title: Dostrajanie warstwy ORM w projekcie wielomodułowym
 categories: [orm]
 ---
-## Wstęp
 Częstym jak sądzę przypadkiem w średnich i większych projektach informatycznych jest współdzielenie modelu domeny przez kilka niezależnych aplikacji. 
 Takimi aplikacjami mogą być np.: web portal dla klientów, wewnętrzna aplikacja administracyjna, moduł raportujący.
 
@@ -31,15 +30,15 @@ Mamy zatem projekt wielomodułowy, w skład którego wchodzą poszczególne apli
  - dao - konfiguracja dostępu do bazy danych, klasy dao
 
 
-**Moduł - model domeny**
+### Moduł - model domeny
 
 Model domeny stanowią encje (obiekty POJO) opisane adnotacjami Hiberanate Annotations. 
 Adnotacje są dobrym sposobem na zdefiniowanie domyślnych mapowań ORM. Poszczególne aplikacje mają bowiem możliwość nadpisania domyślnych mapowań przy użyciu plików konfiguracyjnych xml (hbm.xml). Zwracam uwagę na to, że Hibernate Annotations bazują na specyfikacji **JPA** jednak nie wymagają użycia modułu JPA (dostarczającego interfejs javax.persistence.EntityManager).
 
-**Moduł - dao**
+### Moduł - dao
 
 Konfigurację SessionFactory tworzymy wykorzystując Spring-ową fabrykę wspierającą Hibernate Annotations.
-{% highlight java %}
+{% highlight xml %}
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" 
 		  p:dataSource-ref="dataSource">
 		<property name="annotatedClasses">
@@ -55,17 +54,16 @@ Konfigurację SessionFactory tworzymy wykorzystując Spring-ową fabrykę wspier
         </property>
 		[...]
 	</bean>
-</code></pre>
 {% endhighlight %}
-W parametrze *annotatedClasses* podajemy listę naszych encji. Co warte uwagi Spring umożliwia wskazanie pakietu który będzie automatycznie skanowany w poszukiwaniu encji (parametr *packagesToScan*).
+W parametrze ``annotatedClasses`` podajemy listę naszych encji. Co warte uwagi Spring umożliwia wskazanie pakietu który będzie automatycznie skanowany w poszukiwaniu encji (parametr ``packagesToScan``).
  
-Nas jednak bardziej interesuje parametr *mappingDirectoryLocations*. Wskażemy w nim katalog, z którego załadowane zostaną pliki hbm.xml. 
+Nas jednak bardziej interesuje parametr ``mappingDirectoryLocations``. Wskażemy w nim katalog, z którego załadowane zostaną pliki ``hbm.xml``. 
 W ten sposób umożliwiamy aplikacjom dostarczenie własnych mapowań ORM.
 
 ## Przykład
 Uporawszy się z konfiguracją, przetestujmy jak działa nadpisywanie mapowań na konkretnym przykładzie.
 
-Mamy zatem klasę **FeedCategory**, która dziedziczy po **BaseEntity** i zawiera listę podkategorii (pole *subCategories*).
+Mamy zatem klasę **FeedCategory**, która dziedziczy po **BaseEntity** i zawiera listę podkategorii (pole ``subCategories``).
 
 {% highlight java %}
 
@@ -98,7 +96,7 @@ public class FeedCategory extends BaseEntity {
 
 {% endhighlight %}
 
-Jak widzimy, domyślnie Hibernate załaduje listę podkategorii leniwie (w momencie użycia) co zostało zdefiniowane ustawieniem **fetch = FetchType.LAZY**.
+Jak widzimy, domyślnie Hibernate załaduje listę podkategorii leniwie (w momencie użycia) co zostało zdefiniowane ustawieniem ``fetch = FetchType.LAZY``.
 Załóżmy jednak, że chcemy aby w naszej aplikacji podkategorie były ładowane "chciwie" (ang. eagerly) a więc zaraz po załadowaniu obiektu głównego.
 
 W tym celu tworzymy w module konkretnej aplikacji katalog __orm/custom-mappings__, który wskazaliśmy w konfiguracji SessionFactory (w projekcie maven-owym umieszczamy ten katalog w gałęzi src/main/resources) i umieszczamy w nim plik feedCategory.hbm.xml:
@@ -146,7 +144,7 @@ W tym celu konfigurację SessionFactory zastępujemy konfiguracją EntityManager
 {% endhighlight %}
 
 Szczegółowe ustawienia dostarczamy w pliku **persistence.xml**, w którym również specyfikujemy listę naszych encji 
-(ustawiając parametr *hibernate.archive.autodetection* nakazujemy Hibernate Entity Manager aby wyszukał encje w określonych lokalizacjach, 
+(ustawiając parametr ``hibernate.archive.autodetection`` nakazujemy Hibernate Entity Manager aby wyszukał encje w określonych lokalizacjach, 
 więcej informacji na ten temat tutaj: [Do I need class elements in persistence.xml](http://stackoverflow.com/questions/1780341/do-i-need-class-elements-in-persistence-xml)):
 
 {% highlight xml %}
@@ -159,9 +157,9 @@ więcej informacji na ten temat tutaj: [Do I need class elements in persistence.
 {% endhighlight %}
 
 Pozostaje skonfigurować wykrywanie mapowań xml dostarczonych przez poszczególne aplikacje. 
-Niestety w przypadku JPA nie mamy analogicznego do *mappingDirectoryLocations* parametru zarówno na poziomie konfiguracji w pliku persistence.xml jak i udogodnień Spring-a. 
+Niestety w przypadku JPA nie mamy analogicznego do ``mappingDirectoryLocations`` parametru zarówno na poziomie konfiguracji w pliku persistence.xml jak i udogodnień Spring-a. 
 Rozwiązaniem jest przekazanie do LocalContainerEntityManagerFactoryBean klasy implementującej interfejs 
-**PersistenceUnitPostProcessor**. Postprocesor ma możliwość modyfikowanie opcji konfiguracyjnych, w tym dodanie mapowań xml.
+``PersistenceUnitPostProcessor``. Postprocesor ma możliwość modyfikowanie opcji konfiguracyjnych, w tym dodanie mapowań xml.
 
 {% highlight java %}
 public class DefaultPostprocessor implements PersistenceUnitPostProcessor, ResourceLoaderAware {

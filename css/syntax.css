@@ -1,39 +1,41 @@
-.s1, .s2, .sx, .mi {
-color:#91BB9E;
-}
-.nb {
-color:#FB9A4B;
-font-style:italic;
-}
-.k, .o {
-color:#96DD3B;
-}
-.ss {
-color:#FFCF87;
-}
-.vi {
-color:#FB9A4B;
-}
-.c, .c1 {
-color:#245032;
-}
-.no {
-color:#9DF39F;
-}
-.kp, .ss {
-color:#497958;
+.k, .kd, .kt, .kn, .nb, .nt, .kc {
+    color: #c9913a;
+    font-weight: bold;
 }
 
+.nc, .no {
+    color: #c97c04;
+}
+
+.nf {
+    color: #dfcbac;
+}
+
+.s, .s1, .s2, .sh, .sr {
+    color: #8eb370;
+}
+
+.c, .c1, .x {
+    color: #5d575d;
+    font-style: italic;
+}
+
+code.java .nd {
+    color: #7a7591;
+}
+
+code.xml .nt {
+    font-weight: normal;
+}
 
 code {
   font-family: Monaco, monospace;
 }
 
 pre {
-  font: 1.5em Monaco, monospace;
+  font: 0.75em Monaco, monospace;
   line-height: 1.4em;
-  display: block;
-  color: white;
+  color: #ccc;
   background: #202020;
   -moz-border-radius: 0.3em;
   -webkit-border-radius: 0.3em;
@@ -43,5 +45,5 @@ pre {
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
-  margin-bottom: 20px;
+  margin-bottom: 1em;
 }

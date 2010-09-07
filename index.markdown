@@ -4,7 +4,7 @@ title: "Consileon PL - DevBlog"
 description: ""
 ---
 <div id="entries">
-<h1>Wpisy:</h1>
+<h1>Ostatnie wpisy:</h1>
   <ul>{% for post in site.posts %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}.</a>

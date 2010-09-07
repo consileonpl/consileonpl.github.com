@@ -3,15 +3,11 @@
 {% else %}
 <div class="post">
 {% endif %}
-  <div class="content">
-    <h1 class="title"><a href="{{ page.url }}">{{ page.title }}</a></h1>
+  <div class="post-header">
+    <h1><a href="{{ page.url }}">{{ page.title }}</a></h1>
+    <h2>{{ page.date | date_to_string }} {% for tag in page.categories %} &middot; <a href="/tags/{{tag}}.html" rel="tag">{{tag}}</a>{% endfor %}</h2>
+  </div>
+  <div class="post-content">
     {{ body }}
   </div>
-  
-  {% unless page.hide_meta %}
-  <div class="meta">
-    <span class="date"><a href="/{{ page.date | date: "%Y" }}/{{ page.date | date: "%m" }}">{{ page.date | date: "%e" | ordinalize }} {{ page.date | date: "%B"}} {{ page.date | date: "%Y"}}</a></span>
-    <span class="tags">{% for tag in page.categories %} &middot; <a href="/tags/{{tag}}.html" rel="tag">{{tag}}</a>{% endfor %}</span>
-  </div>
-  {% endunless %}
 </div>
