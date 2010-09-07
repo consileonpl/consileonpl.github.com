@@ -29,14 +29,13 @@ code.xml .nt {
 }
 
 code {
-  font-family: Monaco, monospace;
+  font: 10pt Monaco, monospace;
 }
 
 pre {
-  font: 0.75em Monaco, monospace;
-  line-height: 1.4em;
   color: #ccc;
-  background: #202020;
+  line-height: 1.1em;
+  background-color: #202020;
   -moz-border-radius: 0.3em;
   -webkit-border-radius: 0.3em;
   padding: 0.6em;
