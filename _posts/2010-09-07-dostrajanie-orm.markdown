@@ -200,5 +200,6 @@ W naszym przykładzie plik orm.xml wygląda następująco:
 Jak widać, ostatecznie udało się osiągnąć cel czyli nadpisać tylko to co wymagało dostosowania.
 Niestety wymagało to zmiany konfiguracji projektu w celu integracji standardu JPA.
 
+[http://pkaczor.blogspot.com/2010/10/dostrajanie-warstwy-orm-w-projekcie.html](http://pkaczor.blogspot.com/2010/10/dostrajanie-warstwy-orm-w-projekcie.html)
 
 {% include bio_pawel_kaczor.html %}
