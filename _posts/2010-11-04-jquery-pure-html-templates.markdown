@@ -6,6 +6,8 @@ categories: [jquery]
 
 Ta historia będzie o [jquery pure templates](http://github.com/mpapis/jquery-pure-templates/) - czyste wzorce HTML w jquery.
 
+This article is also available in english version (see link at the bottom of this article).
+
 Podczas pisania kodu na nowym projekcie znalazłem świetną bibliotekę [Pure napisaną przez BeeBole](http://beebole.com/pure/) i miałem właśnie o niej pisać. Ale wraz z użyciem jej znajdowałem coraz więcej problemów. Najpierw chciałem naprawić tą bibliotekę, ale w środku debugowania okazało się to nie takie proste, 20 kilobajtów źródeł ciężko zmienić.
 
 Zdecydowałem się więc napisać swoją bibliotekę opisującą podobną ideę, ale wykorzystując inne podejście. Moja biblioteka jest nadal *czysta*, nie wymaga jednak śmiesznych znaczników HTML żeby wypełnić go danymi, wystarczy napisać kod który zawiera selektory jquery. Moja pierwsza próba została wykonana z użyciem selektorów jquery bezpośrednio w definicji danych:
@@ -62,6 +64,6 @@ Oczywiście założone rozwiązanie może mieć kilka problemów, najważniejszy
 
 Wiem że istnieją szybsze rozwiązania, które mogą bez problemu wyświetlić duże ilości danych, ale moje jest proste, tylko 70 linii kodu, to czyni je niesamowicie prostym w utrzymaniu i modyfikacji. Łatwiej pracować z mniejszą ilością kodu :).
 
-This article is also available in english version: [http://niczsoft.com/2010/11/jquery-pure-templates/](http://niczsoft.com/2010/11/jquery-pure-templates/)
+[http://niczsoft.com/2010/11/jquery-pure-templates/](http://niczsoft.com/2010/11/jquery-pure-templates/)
 
 {% include bio_michal_papis.html %}
