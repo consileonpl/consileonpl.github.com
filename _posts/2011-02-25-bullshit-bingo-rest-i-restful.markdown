@@ -82,7 +82,7 @@ coby nie robić tego ręcznie ;)) i nie będę one już takie piękne.
 
 ## Pokaż mi swój identyfikator, a powiem ci jaką masz sprzedaż
 
-Jest jeszcze jedna ciekawa osobliwość posiadania identyfikatorów w adresach URL. Otórz okazuje się, że mogą one udostępniać na zewnątrz
+Jest jeszcze jedna ciekawa osobliwość posiadania identyfikatorów w adresach URL. Otóż okazuje się, że mogą one udostępniać na zewnątrz
 informacje, którymi niekoniecznie chcielibyśmy się dzielić. Jeżeli przykładowo nasza strona pozwala podglądać publiczne profile użytkowników
 np. pod adresem:
 
