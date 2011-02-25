@@ -149,7 +149,7 @@ Obecnie wszystkie projekty muszą być REST-owe, musi być JSON i musi być coś
 działa na nerwy niż przynosi coś sensownego, ale co zrobić prawa marketingu są nieubłagane i aby mieć inwestorów trzeba wykazać się
 innowacyjnością, nawet za cenę funkcjonalności, bezpieczeństwa czy łatwości programowania i utrzymania. Ja osobiście REST i RESTful dokładam
 do swojej listy [Bullshit Bingo](http://en.wikipedia.org/wiki/Buzzword_bingo) i Tobie też polecam zastanowienie się nad tym, czy faktycznie
-ten REST jest Ci potrzebny w Twojej aplikacji, aby potem na spotkaniu ktoś nie wstał i nie zawołał **Bullshit!**.
+ten REST jest Ci potrzebny w Twojej aplikacji, aby potem na spotkaniu ktoś nie wstał i nie zawołał **Bullshit!**
 
 [http://michalorman.pl/blog/2011/02/bullshit-bingo-rest-i-restful/](http://michalorman.pl/blog/2011/02/bullshit-bingo-rest-i-restful/)
 
