@@ -5,7 +5,7 @@ description: Wpis o tym dlaczego REST i RESTful należy często traktować w kat
 keywords: REST RESTful Bullshit Bingo
 categories: [rest]
 ---
-Ostatnio nie mam trochę czasu na techniczne wpisy, także tym razem wpis będzie bardziej filozoficzny. Wczoraj zostałem zapytany co myślę
+Ostatnio nie mam trochę czasu na techniczne wpisy, także tym razem wpis będzie bardziej filozoficzny. Wczoraj zostałem zapytany o moją opinię
 na temat konwencji [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer) co zainspirowało mnie do stworzenia tego wpisu,
 ku przestrodze przed bezmyślnym wciskaniem tej architektury do każdej aplikacji. 
 
