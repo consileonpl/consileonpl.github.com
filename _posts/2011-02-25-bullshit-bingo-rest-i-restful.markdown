@@ -78,7 +78,7 @@ robi się:
 	/oferty/131/Mac-Book-Pro
 
 Także suma sumarum na końcu i tak będziesz musiał ręcznie te piękne URL-e przepisywać (albo zaimplementować sprytny sposób ich przepisywania
-coby nie robić tego ręcznie ;)) i nie będę one już takie piękne.
+coby nie robić tego ręcznie ;)) i nie będą one już takie piękne.
 
 ## Pokaż mi swój identyfikator, a powiem ci jaką masz sprzedaż
 
@@ -128,7 +128,7 @@ O tym problemie [pisałem już kiedyś](http://michalorman.pl/blog/2010/03/zmien
 
 Do tej pory skupiałem się na architekturze REST-owej w kontekście witryny internetowej. A co w przypadku serwisów webowych? Wydaje się, że
 architektura ta jest wręcz stworzona do takich serwisów. O ile człowiek nie będzie łaził po stronie manipulując identyfikatorami o tyle
-aplikacja korzystająca z serwisu nie będzie miała z tym problemu. Jednak w praktyce nie koniecznie wszystko wygląda tak różowo.
+aplikacja korzystająca z serwisu nie będzie miała z tym problemu. Jednak w praktyce niekoniecznie wszystko wygląda tak różowo.
 
 W całej swojej karierze deweloperskiej nie spotkałem jeszcze serwisu udostępniającego jakieś poważne usługi (np. płatności), którego żądania
 przyjmują tylko 1 parametr albo wcale. Zwykle takie żadania przyjmują kilka parametrów, a mi zdażało się pisać takie co przyjmowały 10-15
@@ -146,7 +146,7 @@ kiedy architektura REST jest naprawdę potrzebna i sensowna, a kiedy jest tylko 
 architektura ze sobą przynosi i czy w naszej aplikacji będzie ona miała zastosowanie i będzie w ogóle wykorzystywana.
 
 Obecnie wszystkie projekty muszą być REST-owe, musi być JSON i musi być coś z *Enterprise* w nazwie. Ta buzzwordowa karuzela już bardziej
-działa na nerwy niż przynosi coś sensownego, ale co zrobić prawa marketingu są nieubłagane i aby mieć inwestorów trzeba wykazać się
+działa na nerwy niż przynosi coś sensownego, ale co zrobić, prawa marketingu są nieubłagane i aby mieć inwestorów trzeba wykazać się
 innowacyjnością, nawet za cenę funkcjonalności, bezpieczeństwa czy łatwości programowania i utrzymania. Ja osobiście REST i RESTful dokładam
 do swojej listy [Bullshit Bingo](http://en.wikipedia.org/wiki/Buzzword_bingo) i Tobie też polecam zastanowienie się nad tym, czy faktycznie
 ten REST jest Ci potrzebny w Twojej aplikacji, aby potem na spotkaniu ktoś nie wstał i nie zawołał **Bullshit!**
