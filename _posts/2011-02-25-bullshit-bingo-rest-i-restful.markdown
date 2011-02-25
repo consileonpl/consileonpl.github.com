@@ -118,7 +118,7 @@ I taki adres będzie ukryty w naszym formularzu (w atrybucie ``action`` elementu
 Takie działanie może i jest sensowne z punktu widzenia REST-a, ale z punktu widzenia działania witryny i przeglądarki internetowej jest wielce
 niepożadana. Dlaczego? Jeżeli nasz formularz jest nieprawidłowy nie chcemy lądować na stronie z listą, chcemy ponownie wyswietlić formularz
 wraz z odpowiednimi komunikatami o błędach. Innymi słowy nie chcemy być na ``/orders`` tylko ciągle na ``/orders/new``. Niestety przeglądarka
-zmieni nam adres, mimo iż pozostajemy w tym samym miejscu. Jeszcze gorzej jest, jeżeli nie w ogóle nie udostępniamy strony o adresie ``/orders``
+zmieni nam adres, mimo iż pozostajemy w tym samym miejscu. Jeszcze gorzej jest, jeżeli w ogóle nie udostępniamy strony o adresie ``/orders``
 (czy chcemy użytkownikom udostępniać stronę z listą wszystkich zamówień złożonych w systemie?). Jeżeli użytkownik w tym momencie zrobi zakładkę, aby
 późiej powrócić i poprawić formularz zamiast formularza przywita go piękne 404, a przecież wcześniej był na tym formularzu i go wypełniał!
 
@@ -137,7 +137,7 @@ odciśki SSH czy dane statystyczne.
 
 Wszystko to powoduje, że nasze piękne URL-e przestają być już piękne i nie ma w tym nic złego, w końcu te URL-e nie są przeznaczone dla
 ludzi. Maszyny, przynajmniej jak na razie, nie mają zmysłów ani gustów i im nie przeszkadzają takie długie adresy. W związku z tym jaki sens
-jest upierwać się przy REST-owości w takich serwisach?
+jest upierać się przy REST-owości w takich serwisach?
 
 ## A morał jest krótki i niektórym znany...
 
@@ -148,7 +148,7 @@ architektura ze sobą przynosi i czy w naszej aplikacji będzie ona miała zasto
 Obecnie wszystkie projekty muszą być REST-owe, musi być JSON i musi być coś z *Enterprise* w nazwie. Ta buzzwordowa karuzela już bardziej
 działa na nerwy niż przynosi coś sensownego, ale co zrobić prawa marketingu są nieubłagane i aby mieć inwestorów trzeba wykazać się
 innowacyjnością, nawet za cenę funkcjonalności, bezpieczeństwa czy łatwości programowania i utrzymania. Ja osobiście REST i RESTful dokładam
-do swojej listy [Bullhit Bingo](http://en.wikipedia.org/wiki/Buzzword_bingo) i Tobie też polecam zastanowienie się nad tym, czy faktycznie
+do swojej listy [Bullshit Bingo](http://en.wikipedia.org/wiki/Buzzword_bingo) i Tobie też polecam zastanowienie się nad tym, czy faktycznie
 ten REST jest Ci potrzebny w Twojej aplikacji, aby potem na spotkaniu ktoś nie wstał i nie zawołał **Bullshit!**.
 
 [http://michalorman.pl/blog/2011/02/bullshit-bingo-rest-i-restful/](http://michalorman.pl/blog/2011/02/bullshit-bingo-rest-i-restful/)
