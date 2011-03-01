@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Warunki korzystania
 hide_meta: true
 ---
