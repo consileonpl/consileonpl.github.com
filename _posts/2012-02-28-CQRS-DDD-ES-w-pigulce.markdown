@@ -61,16 +61,15 @@ Można odrzucać równoległe zmiany w aggregacie tylko dla określonych zdarze�
 
 Testowanie logiki biznesowej jest czytelne i efektywne. Szkielet metody testującej wygląda następująco:
 
-{% highlight java %}
-// given
-// create AR by replying list of events
+    // given
+    // create AR by replying list of events
 
-// when
-// dispatch a Command
+    // when
+    // dispatch a Command
 
-// then
-// expect given list of events or exception
-{% endhighlight %}
+    // then
+    // expect given list of events or exception
+
 W testach weryfikujemy zatem tylko to czy wygenerowane zdarzenia odpowiadają tym oczekiwanym.
 
 ## Optymalizacja obsługi zapytań
