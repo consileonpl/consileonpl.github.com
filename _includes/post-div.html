@@ -5,7 +5,7 @@
 {% endif %}
   <div class="post-header">
     <h1><a href="{{ page.url }}">{{ page.title }}</a></h1>
-    <h2>{{ page.date | date_to_string }} {% for tag in page.categories %} &middot; <a href="/tags/{{tag}}.html" rel="tag">{{tag}}</a>{% endfor %}</h2>
+    <h2>{{ page.date | date: "%Y-%m-%d" }} {% for tag in page.categories %} &middot; <a href="/tags/{{tag}}.html" rel="tag">{{tag}}</a>{% endfor %}</h2>
   </div>
   <div class="post-content">
     {{ body }}
