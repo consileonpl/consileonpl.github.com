@@ -3,7 +3,7 @@ layout: post
 title: Breaking the Spring by example
 categories: [spring, framework]
 ---
-First of all, I'm not against Spring, IoC frameworks or frameworks in general. Quite the contrary, I'm big fun of many different frameworks. Said that I must admit that sometimes when a framework hides too much magic you risk loosing control of your application. Once you realize that you've just created zombie app you are afraid of, it may be too late ;) So be careful with framework selection even if you think of commonly used framework like Spring...
+First of all, I'm not against Spring, IoC frameworks or frameworks in general. Quite the contrary, I'm big fan of many different frameworks. Said that I must admit that sometimes when a framework hides too much magic you risk loosing control of your application. Once you realize that you've just created zombie app you are afraid of, it may be too late ;) So be careful with framework selection even if you think of commonly used framework like Spring...
 
 
 ## Spring - ultimate IoC container
