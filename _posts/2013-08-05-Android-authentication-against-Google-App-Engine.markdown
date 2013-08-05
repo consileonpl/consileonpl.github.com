@@ -3,20 +3,27 @@ layout: post
 title: Android authentication against Google App Engine
 categories: [google-app-engine, android]
 ---
-Recently I was a part of project consisting of Google App Engine server part and Android client part.
+Recently I was a part of project consisting of Google App Engine server side and Android mobile client.
 Our main goal was to provide as much SSO as possible so we decided to use same Google accounts both on the server and the client.
 
-This post covers the whole client side authentication - retrieving Google account, refreshing token, receiving cookies from the server and using it for accessing server resources.
+This post covers the whole client side authentication - retrieving Google account, invalidating and refreshing the token, receiving cookies from the server and using it for accessing server resources via HttpClient.
 
 ## Retrieving Google account and authentication token
 
 For accessing accounts in the Android you must add security permissions in the Android manifest.
 
 ### Retrieving Google account
-Following snippet allows you to retrieve <accountName\>@gmail.com
+Following snippet allows you to retrieve <accountName\>@gmail.com.
 
 {% highlight java %}
-private Account getAccountForName(String accountName) {
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
+{% endhighlight %}
+
+{% highlight java %}
+private Account getAccountForName(Context context, String accountName) {
+    AccountManager manager = AccountManager.get(context);
     Account[] accounts = manager.getAccountsByType("com.google");
     if (accounts == null) {
         return null;
@@ -32,6 +39,15 @@ private Account getAccountForName(String accountName) {
 
 ### Retrieving Auth token from AccountManagerFuture
 If we have an account we can get auth token from it.
+For more detail about possible exceptions read the <a href="http://developer.android.com/reference/android/accounts/AccountsException.html">official documentation</a>.
+
+{% highlight java %}
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AccountsException;
+import android.content.Intent;
+import android.os.Bundle;
+{% endhighlight %}
 
 {% highlight java %}
 private String getTokenFromAccountManagerFuture(AccountManagerFuture<Bundle> future) throws AccountsException, IOException {
