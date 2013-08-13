@@ -55,7 +55,7 @@ private String getTokenFromAccountManagerFuture(AccountManagerFuture<Bundle> fut
     Intent intent = (Intent) bundle.get(AccountManager.KEY_INTENT);
     if (intent != null) {
         //Here you should start intent or throw your own exception that takes the intent and passes it to the other (preferably view) class.
-        //This intent is a popup saying that your application want to access accounts. It appears one per installation.
+        //This intent is a popup saying that your application want to access accounts. It appears once per installation.
     }
     return bundle.getString(AccountManager.KEY_AUTHTOKEN);
 }
@@ -128,7 +128,7 @@ public HttpContext getAuthenticatedHttpContext(String account) {
 From now we can make authenticated requests using our httpContext;
 ## Troubleshooting
 There can be a case that you will not get the cookie used for authentication in the requested httpContext.
-For that you should use extend HttpContext and check if there is a cookie:
+For that you should implement HttpContext and check if there is a cookie:
 {% highlight java %}
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.protocol.ClientContext;
