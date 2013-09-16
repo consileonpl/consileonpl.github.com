@@ -4,7 +4,7 @@ title: Monads - function composition on steroids
 categories: [wzorce]
 ---
 Once you start learning functional programming (whatever language you choose) sooner or later you will hit on Monad.
-Your initial understanding of Monad concept, after reading a couple of tutorials (thousands of them are available in the web), might not be very good and thats because of [*The Curse of the Monad*](http://www.i-programmer.info/news/167-javascript/5207-crockford-on-monads-and-gonads.html): 
+Your initial understanding of Monad concept, after reading a couple of tutorials (many of them are available in the web), might not be very good and that's because of [*The Curse of the Monad*](http://www.i-programmer.info/news/167-javascript/5207-crockford-on-monads-and-gonads.html): 
 
 > In addition to it begin useful, it is also cursed and the curse of the monad is that once you get the epiphany, once you understand - "oh that's what it is" - you lose the ability to explain it to anybody.
 >
