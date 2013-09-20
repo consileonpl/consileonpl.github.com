@@ -3,10 +3,7 @@ layout: post
 title: Android authentication against Google App Engine
 categories: [google-app-engine, android]
 ---
-Recently I was a part of project consisting of Google App Engine server side and Android mobile client.
-Our main goal was to provide as much SSO as possible so we decided to use same Google accounts both on the server and the client.
-
-This post covers the whole client side authentication - retrieving Google account, invalidating and refreshing the token, receiving cookies from the server and using it for accessing server resources via HttpClient.
+In this post I will cover Android authentication against Google App Engine - retrieving Google account from the Android OS, invalidating and refreshing the token, receiving cookies from the server and using them for accessing server resources via HttpClient.
 
 ## Retrieving Google account and authentication token
 
@@ -14,12 +11,6 @@ For accessing accounts in the Android you must add security permissions in the A
 
 ### Retrieving Google account
 Following snippet allows you to retrieve <accountName\>@gmail.com.
-
-{% highlight java %}
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.content.Context;
-{% endhighlight %}
 
 {% highlight java %}
 private Account getAccountForName(Context context, String accountName) {
@@ -38,16 +29,7 @@ private Account getAccountForName(Context context, String accountName) {
 {% endhighlight %}
 
 ### Retrieving Auth token from AccountManagerFuture
-If we have an account we can get auth token from it.
-For more detail about possible exceptions read the <a href="http://developer.android.com/reference/android/accounts/AccountsException.html">official documentation</a>.
-
-{% highlight java %}
-import android.accounts.AccountManager;
-import android.accounts.AccountManagerFuture;
-import android.accounts.AccountsException;
-import android.content.Intent;
-import android.os.Bundle;
-{% endhighlight %}
+If we have an account we can get the auth token from it.
 
 {% highlight java %}
 private String getTokenFromAccountManagerFuture(AccountManagerFuture<Bundle> future) throws AccountsException, IOException {
@@ -62,8 +44,7 @@ private String getTokenFromAccountManagerFuture(AccountManagerFuture<Bundle> fut
 {% endhighlight %}
 
 ### Retrieving refreshed Auth token
-Now we can write a public method to get the refreshed token. For that we will use mentioned methods.
-Keep in mind that you have to handle the intent if you passed it somehow.
+Now we can write a method to get the refreshed token. For that we will use previously implemented methods.
 
 {% highlight java %}
 public String getAuthToken(String accountName) throws AccountsException, IOException {
@@ -92,18 +73,18 @@ Let's say that your application is simply named 'test', so it's address is:
 
 ### Authentication
 Google App Engine provides a special path for authentication using token.
-The path we will use is with a redirect to localhost:
+The path we will use contains a redirect to localhost:
 {% highlight java %}
 "/_ah/login?continue=http://localhost/&auth="
 {% endhighlight %}
 
 
-And the whole URL looks like this:
+The whole URL should look like this:
 {% highlight java %}
 "http://test.appspot.com/_ah/login?continue=http://localhost/&auth="
 {% endhighlight %}
 As you can see we have to append our token at the end.
-Then we issue a GET request to that URL and we are almost done.
+Then we send a GET request to the mentioned URL and we are almost done.
 
 {% highlight java %}
 public HttpGet getAuthenticateRequest(String token) {
@@ -113,7 +94,7 @@ public HttpGet getAuthenticateRequest(String token) {
 
 ### Google App Engine token cookie
 We have to use the same HttpContext, that we used for authentication, for every request in the application.
-Remember to implement error handling in this method. Http status code 302 (`HttpStatus.SC_MOVED_TEMPORARILY`) is ok for authentication request.
+Remember to implement error handling in this method. Http status code 302 (`HttpStatus.SC_MOVED_TEMPORARILY`) is OK for authentication request.
 
 {% highlight java %}
 //Get token using our method
@@ -125,18 +106,10 @@ public HttpContext getAuthenticatedHttpContext(String account) {
     return httpContext;
 }
 {% endhighlight %}
-From now we can make authenticated requests using our httpContext;
+From now on we can send authenticated requests using our httpContext;
 ## Troubleshooting
 There can be a case that you will not get the cookie used for authentication in the requested httpContext.
-For that you should implement HttpContext and check if there is a cookie:
-{% highlight java %}
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-{% endhighlight %}
+You can check if the cookie exists with the following snippet.
 
 {% highlight java %}
 public class AuthenticatedHttpContext implements HttpContext {
