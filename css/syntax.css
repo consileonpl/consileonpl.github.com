@@ -16,7 +16,7 @@
 }
 
 .c, .c1, .x {
-    color: #5d575d;
+    color: #7d777d;
     font-style: italic;
 }
 
@@ -28,8 +28,12 @@ code.xml .nt {
     font-weight: normal;
 }
 
-code {
-  font: 10pt Monaco, monospace;
+code { 
+  border-radius:3px;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC; 
+  padding: 0 3px 0 3px;
+  font-size: 85%;
 }
 
 pre {
@@ -45,4 +49,11 @@ pre {
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
   margin-bottom: 1em;
+}
+
+pre code { 
+  font: 11pt Monaco, monospace;
+  border: 0px; 
+  background-color: #202020;
+  padding: 0;
 }

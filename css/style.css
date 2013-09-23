@@ -70,6 +70,17 @@ td {
     padding: 2px 10px;
 }
 
+blockquote {
+  padding: 0 10px;
+  font-style: italic;
+  color: #777;
+}
+
+blockquote em {
+  display: block;
+  text-align: right;
+}
+
 #container {
   margin: 0 auto;
   padding: 10px 0;
