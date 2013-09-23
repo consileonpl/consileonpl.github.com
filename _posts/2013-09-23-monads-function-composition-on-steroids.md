@@ -6,8 +6,8 @@ categories: [wzorce]
 Once you start learning functional programming (whatever language you choose) sooner or later you will hit on Monad.
 Your initial understanding of Monad concept, after reading a couple of tutorials (many of them are available in the web), might not be very good and that's because of [*The Curse of the Monad*](http://www.i-programmer.info/news/167-javascript/5207-crockford-on-monads-and-gonads.html): 
 
-_In addition to it begin useful, it is also cursed and the curse of the monad is that once you get the epiphany, once you understand - "oh that's what it is" - you lose the ability to explain it to anybody._
-      _-- Douglas Crockford_
+> In addition to it begin useful, it is also cursed and the curse of the monad is that once you get the epiphany, once you understand - "oh that's what it is" - you lose the ability to explain it to anybody.
+> *-- Douglas Crockford*
 
 Although the curse might be real, I'm writing here yet another monad tutorial because, what I believe, the best way to understand monad is to write tutorial about it:)
 
@@ -135,7 +135,7 @@ g = \x -> IntWrapper(x * 3)
 
 So, how we can compose those functions?
 
-`h = f >.> g --> won't work`
+    h = f >.> g --> won't work
 
 We can't use `>.>` operator because the types do not match. It is not possible to apply `Int -> Monad[Int]` to `Monad[Int]`. We need `Int`, not `Monad[Int]`
 The solution would be to create a different composition operator/function that would extract `Int` from `Monad[Int]` before performing application but that would require `Monad` to provide some kind of extract method. That doesn't sound like a good idea (and in fact would break the whole idea of Monad).
