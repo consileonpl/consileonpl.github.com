@@ -18,6 +18,8 @@ This article covers how to configure, authenticate and perform authorized reques
 
 Authentication against Google App Engine using Google Accounts API is done by accessing Google Account (which was added in Android) and use it's token to get authentication cookie.
 
+Authentication is one done in the following steps:
+
 - Obtain authentication token from the Google Account,
 - Use that token to retrieve authentication cookie from Google App Engine,
 - Use authentication cookie in every request made further.
