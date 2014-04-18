@@ -15,7 +15,7 @@ tmux stands for terminal multiplexer. It is really easy to use even for someone
 who just launched it for the first time.
 
 Since the tmux only drawback is default hotkey for commands (`ctrl+b`) I suggest
-to remap it in the `tmux.conf` to `ctrl+a`. In this tutorial I will use the
+to remap it in the `~/.tmux.conf` to `ctrl+a`. In this tutorial I will use the
 latter shortcut.
 
 To start tmux (session with one window) invoke `tmux` in the console.
@@ -31,8 +31,8 @@ To rename current window press `ctrl+a` then press `,`.
 Since our work can't be handled in just one window (for example we want to type
 commands and watch logs at the same time) we want to split our window:
 
-* for vertical split press `ctrl+a` then press `"` (`shift+"`)
-* for horizontal split press `ctrl+a` then press `%` (`shift+5`)
+* for horizontal split press `ctrl+a` then press `"` (`shift+"`)
+* for vertical split press `ctrl+a` then press `%` (`shift+5`)
 
 ![Multiple panes in one window][2]
 
@@ -56,7 +56,7 @@ press `ctrl+a` then `:` (`shift+;`) and type `select-pane -[ULDR]` where U
 stands for Up, L for Left and so on.
 
 This is not handy at all, so for our convenience we have to add some shortcuts
-to the `tmux.conf`:
+to the `~/tmux.conf`:
 
 I suggest Vim style navigation:
 
@@ -73,8 +73,10 @@ that - having multiple presets of windows (with panes) for each project will
 save you a lot of time. And separating one project from another will protect you
 from doing something accidentally on the wrong project.
 
-We know that `tmux` command will create us an empty session with number as a name.
-However we can create session with specific name: `tmux new -s <name>`.
+We know that `tmux` command will create an empty session with number as a name.
+However we can create session with specific name: `tmux new -s <name>`. If you
+forgot to create new session with specified name you can always rename the 
+current session using `ctrl+a` followed by `$` (`shift+4`) shortcut.
 
 Let's create 2 sessions using this notation:
 
@@ -85,12 +87,13 @@ Let's create 2 sessions using this notation:
 
 * If we are in a session we can detach from it by pressing `ctrl-a` and `d`.
 * To get the of list current sessions type `tmux ls` or `tmux list-sessions`.
-* After know sessions names we can attach to them using `tmux attach -t <name>`
+* When we know sessions names we can attach to them using `tmux attach -t <name>`
 or we can kill session via `tmux kill-session -t <name>` command.
 
 ## Configuration
 
-Changes that can make your tmux usage even easier:
+Changes that can make your tmux usage even easier (applied in the configuration,
+default: `~/tmux.conf`).
 
 * remap `ctrl-b` to `ctrl-a`: `unbind C-b` and `set -g prefix C-a`
 * configuration reload: `bind r source-file ~/.tmux.conf \; display "Reloaded!"`
