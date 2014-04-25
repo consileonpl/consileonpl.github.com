@@ -2,7 +2,7 @@
 layout: post
 categories: [tmux, tools]
 ---
-In the recent post ([Terminal Unleashed][1]) I introduced a great tool that makes
+In the recent post ([Terminal Unleashed][1]) I've introduced a great tool that makes
 terminal work easier and faster - tmux. I suggest you to read the previous post
 before further reading.
 
@@ -35,7 +35,9 @@ lets connect from a different machine to our local session.
 
 To do that we will need an SSH server running ([OpenSSH][2]) and an user.
 For safety reasons (limited privileges) I suggest adding another user in your OS,
-in this tutorial we will call him `pair`.
+in this tutorial we will call him `pair`. Also create a group (we will name it `tmux_group`).
+
+Don't forget to add both your and `pair` accounts to the group `tmux_group`.
 
 Add your client's public key to the authorized keys file (`~/.ssh/authorized_keys`).
 
@@ -48,8 +50,6 @@ ssh pair@your_machine
 
 As you may noticed you have connected to your machine, but it is not the tmux
 session. Shared tmux session requires a designated socket.
-Socket must be accessible by all users who join our session (in this case you
-and the `pair` user).
 
 {% highlight bash %}
 tmux -S <socket_name> new -s <session_name>
@@ -57,6 +57,8 @@ tmux -S <socket_name> new -s <session_name>
 
 Lets start the tmux session named "shared" with socket named "pair_sock".
 For our convenience create the `/var/tmux` dir which will store the tmux sockets.
+Change dir's group to the `tmux_group` and set permissions to 770 (`drwxrwx---`),
+otherwise neither you or remote users won't be able to connect.
 
 {% highlight bash %}
 tmux -S /var/tmux/pair_sock new -s shared
