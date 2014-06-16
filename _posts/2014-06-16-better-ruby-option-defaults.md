@@ -1,5 +1,5 @@
 ---
-layout: post
+title: Better ruby defaults for hash options
 categories: [ruby]
 ---
 Almost every ruby / RoR project includes global configuration. Sometimes it is
@@ -23,7 +23,7 @@ class Config
     @hash['option'] || "option's default value"
   end
 end
-{% endhiglight %}
+{% endhighlight %}
 
 However this approach have a major drawback: what if we wanted `nil` as the
 option value?
@@ -33,7 +33,7 @@ config.option = nil # => nil
 config.option # => "option's default value"
 {$ endhighlight %}
 
-## Hash#fetch to the rescue
+## `Hash#fetch` to the rescue
 
 There is an elegant solution to the `nil` values: `Hash#fetch`.
 This method returns the key value or throws an error (`KeyError`) if they key
