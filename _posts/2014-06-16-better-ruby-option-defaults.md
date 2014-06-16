@@ -1,18 +1,19 @@
 ---
-title: Better ruby defaults for hash options
+layout: post
 categories: [ruby]
+title: Better ruby defaults for hash-based options
 ---
-Almost every ruby / RoR project includes global configuration. Sometimes it is
-a YML file loaded 'as-is', sometimes it's a model or designated configuration
-class.
+Almost every ruby, Ruby on Rails project has global configuration.
+Sometimes it's a YAML file loaded 'as-is', other times it's a model or designated
+configuration class.
 
 There are cases when we have to fallback to default values. In model or
-configuration class the easiest way is to use the `or` operator:
+configuration class the easiest way is to use accessor with the `or` operator:
 
 {% highlight ruby %}
 class Config
   def initialize
-    @hash = {}
+    @hash = ... # empty hash or loaded YAML file
   end
 
   def option=(value)
@@ -25,13 +26,13 @@ class Config
 end
 {% endhighlight %}
 
-However this approach have a major drawback: what if we wanted `nil` as the
+However this approach have a major drawback: what if we wanted a `nil` as the
 option value?
 
 {% highlight ruby %}
 config.option = nil # => nil
 config.option # => "option's default value"
-{$ endhighlight %}
+{% endhighlight %}
 
 ## `Hash#fetch` to the rescue
 
@@ -46,15 +47,16 @@ end
 {% endhighlight %}
 
 {% highlight ruby %}
-config.option = nil # => KeyError: key not found: "option"
+config.option # => KeyError: key not found: "option"
 config.option = nil # => nil
 config.option # => nil
 {% endhighlight %}
 
-We have 2 ways for handling default values:
+We have several ways for handling default values:
 
-* method with 2 params: `Hash#fetch(key, default)`
-* method with a block: `Hash#fetch(key) { default }`
+* method with two params: `Hash#fetch(key, default)`
+* method with a param and a block: `Hash#fetch(key) { default }`
+* method with a param and a block as param: `Hash#fetch(key, &block)`
 
 ### The two params version
 
@@ -72,6 +74,9 @@ def option
 end
 {% endhighlight %}
 
+The double param version with a block as param will be shown in the further
+example.
+
 Both versions result is as we've expected:
 
 {% highlight ruby %}
@@ -82,20 +87,67 @@ config.option # => nil
 
 ## The Pitfall
 
-There's a little niuance in providing default values via `#fetch` one probably
-isn't aware:
+There's a little niuance in providing default values via `#fetch` most coders
+aren't aware of: __When the default value is evaluated?__
 
-_When the default value is evaluated?_
+In the two params version (the one without block param) both parameters are
+__ALWAYS__ evaluated. That' right: even if there is a value provided, the
+default value
+will be evaluated.
 
-In the two params version both parameters are _ALWAYS_ evaluated. That' right:
-even if there is a value provided, the default value will be evaluated.
+{% highlight ruby %}
+def default
+  puts 'default evaluated!'
+  'default value'
+end
+
+def option
+  @hash.fetch('option', default)
+end
+
+config.option # prints "default evaluated!", returns "default value"
+
+config.option = 'set option'
+config.option # prints "default evaluated!", returns "set option"
+
+{% endhighlight %}
 
 Thankfully the block version evaluates block only if there is no value.
 
-In our simple example returning a string this isn't a big thing. However imagine
-situation when you perform time-consuming database operation or getting OAuth
-access token. You don't want to send a request for OAuth token every time you
-use a token you've already obtained.
+In our simple example returning a string this isn't a big thing.
+However imagine situation when you perform time-consuming operation like
+searching throught the huge database or even simplier getting OAuth access token.
+
+{% highlight ruby %}
+def retrieve_oauth2_access_token
+  ... # time consuming operation that sends a request for access token
+end
+
+def access_token
+  @hash.fetch('access_token', retrieve_oauth2_access_token)
+end
+{% endhighlight %}
+
+Now every call to your config's `#access_token` method will send a request to
+the server even if the token was obtained first time you called this method.
+
+For the sake of time and good practices you don't want to send a request to
+remote machine every time you want to use a token.
+
+Good practice is to pass `lambda` as 2nd parameter instead of defining a block.
+That will save you time when you have the same default value in the many places.
+
+{% highlight ruby %}
+def retrieve_oauth2_access_token
+  ... # time consuming operation that sends a request for access token
+end
+
+DEFAULT_OAUTH2 = -> { retrieve_oauth2_access_token }
+
+def access_token
+  @hash.fetch('access_token', &DEFAULT_OAUTH2) # still a block version
+end
+{% endhighlight %}
 
 Being aware of this issue can save you lot of time trying to debug the
 performance issues in your application.
