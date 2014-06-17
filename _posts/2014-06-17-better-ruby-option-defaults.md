@@ -103,7 +103,7 @@ config.option # prints "default evaluated!", returns "set option"
 
 Thankfully the block version evaluates block only if there is no value.
 
-In our example (which only returns a string) this isn't a big thing.
+In this simple example evaluating default value isn't a big thing.
 However imagine a situation when you perform time-consuming operation like
 searching through the huge database or retrieving OAuth access token from
 the server.
