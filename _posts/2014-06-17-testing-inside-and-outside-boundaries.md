@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: [tdd, ruby, rails, architecture]
+categories: [tdd, ruby, rubyonrails, architecture]
 ---
 This post is a continuation of my [previous post][1] about integration
 and unit testing practices. I encourage to read previous post first.
