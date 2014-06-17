@@ -3,11 +3,11 @@ layout: post
 categories: [ruby]
 title: Better ruby defaults for hash-based options
 ---
-Almost every ruby, Ruby on Rails project has global configuration.
+Almost every ruby, Ruby on Rails project has some kind of a global configuration.
 Sometimes it's a YAML file loaded 'as-is', other times it's a model or designated
 configuration class.
 
-There are cases when we have to fallback to default values. In model or
+There are cases when we have to fallback to default values. In a model or
 configuration class the easiest way is to use accessor with the `or` operator:
 
 {% highlight ruby %}
@@ -77,7 +77,8 @@ end
 The double param version with a block as param will be shown in the further
 example.
 
-Both versions result is as we've expected:
+Both versions behave as we expect, returning default value or previously set
+value (even if it's `nil`).
 
 {% highlight ruby %}
 config.option # => "option's default value"
@@ -115,8 +116,9 @@ config.option # prints "default evaluated!", returns "set option"
 Thankfully the block version evaluates block only if there is no value.
 
 In our simple example returning a string this isn't a big thing.
-However imagine situation when you perform time-consuming operation like
-searching throught the huge database or even simplier getting OAuth access token.
+However imagine a situation when you perform time-consuming operation like
+searching through the huge database or retrieving OAuth access token from
+the server.
 
 {% highlight ruby %}
 def retrieve_oauth2_access_token
@@ -129,12 +131,12 @@ end
 {% endhighlight %}
 
 Now every call to your config's `#access_token` method will send a request to
-the server even if the token was obtained first time you called this method.
+the server even if the token was obtained on the first call.
 
 For the sake of time and good practices you don't want to send a request to
 remote machine every time you want to use a token.
 
-Good practice is to pass `lambda` as 2nd parameter instead of defining a block.
+Good practice is to pass a `lambda` as 2nd parameter instead of defining a block.
 That will save you time when you have the same default value in the many places.
 
 {% highlight ruby %}
@@ -149,13 +151,13 @@ def access_token
 end
 {% endhighlight %}
 
-Being aware of this issue can save you lot of time trying to debug the
+Being aware of this issue can save you lots of time trying to debug the
 performance issues in your application.
 
 ## Conclusion
 
 When it comes to manage configuration it's almost always better to use the
-`#fetch` method than the `or` operator. Not only because it allows `nil` values.
+`#fetch` method over the `or` operator. Not only because it allows `nil` values.
 It also helps you discovering missing configuration parts and handle missing
 keys with ease.
 
