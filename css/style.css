@@ -291,6 +291,10 @@ blockquote em {
   margin-bottom: 5em;
 }
 
+.post p img {
+  max-width: 750px;
+}
+
 .full {
   width: 750px;
 }
