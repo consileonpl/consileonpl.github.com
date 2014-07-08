@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: [tmux, tools]
+categories: [terminal, tmux, tools]
 ---
 In the recent post ([Terminal Unleashed][1]) I've introduced a great tool that makes
 terminal work easier and faster - tmux. I suggest you to read the previous post
