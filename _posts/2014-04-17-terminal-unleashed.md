@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: [tmux, tools]
+categories: [terminal, tmux, tools]
 ---
 Web developers will, sooner or later, be forced to use a terminal.
 However not every programmer is aware that being proficient in using a console 
