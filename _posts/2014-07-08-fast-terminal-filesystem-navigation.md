@@ -7,7 +7,7 @@ title: Fast terminal file system navigation
 When it comes to file system navigation in terminal, default solutions often are
 too clumsy. In `bash` autocompletion is annoying because of case-sensitivity.
 On the other hand `zsh` can autocomplete case insensitively and with fuzzy
-string searching but it matches only names in the same working directory.
+string searching but it matches only names in the working directory.
 
 Thankfully there is a tool for the most popular shells that greatly improves
 navigation speed: [autojump][1]. Bascially it remembers (in own database) every
@@ -118,11 +118,6 @@ As stated on the [project's page][1]:
 
 * autojump does not support directories that begin with `-`.
 * For bash users, autojump keeps track of directories by modifying `$PROMPT_COMMAND`. Do not overwrite `$PROMPT_COMMAND`
-
-## Conclusion
-
-Autojump is a great tool for every day usage. Not only it speeds up navigation,
-but reliefs user from remembering sometimes difficult names in strange locations.
 
 {% include bio_tomasz_wojcik.html %}
 
