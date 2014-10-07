@@ -94,10 +94,11 @@ Teraz zabierzmy się za pobranie danych:
 
 
 {% highlight java %}
-	public List<LocalDate> findTheGoodTimes(Path path, 
-			Function<Stream<WindDataRow>, Stream<WindDataRow>> extraFilterFunc, 
-			int startHour, int endHour, double minWind, double minPerc) throws IOException, ParseException {
 
+	public List<LocalDate> findTheGoodTimes(Path path, 
+			Predicate<WindDataRow> filterPredicateFunc, 
+			TimeSpanHours hours, double minWind, double minPerc) throws IOException, ParseException {
+							
 		Objects.requireNonNull(path);
 
 		List<LocalDate> results;
@@ -105,26 +106,27 @@ Teraz zabierzmy się za pobranie danych:
 
 			Stream<WindDataRow> objStream = linesStream.skip(1)
 					.map(line -> line.split("\t")).map(WindDataRow::fromCSVLine);
+			
+			results = processData(filterPredicateFunc, hours, minWind, minPerc, objStream);
 
-   		}
+		}
 
 		return results;
 
 	}
 
-
-}
 {% endhighlight %}
 
   Tu ciekawie - po pierwsze użyłem konstrukcji 'try-with-resources' korzystając z faktu, że Stream<T> implementuje interfejs java.lang.AutoCloseable (niezależnie jak został utworzony). Po drugie - bardzo eleganckiej metody Files.lines(), która potrafi dostarczyć nam zawartość pliku linia po linii jako strumień. Krótko i konkretnie, nigdy czytanie plików w Javie nie było takie proste.
 
-  Z innych ciekawostek - dodałem jako parametr możliwość przekazania funkcji, która wykona jakiś rodzaj filtrowania na strumieniu naszych obiektów WindDataRow, którą postaram się wpleść jakoś w kod przetwarzający dane wejściowe.
+  Z innych ciekawostek - dodałem jako parametr możliwość przekazania funkcji (Predicate), która wykona jakiś rodzaj filtrowania na strumieniu naszych obiektów WindDataRow, którą postaram się wpleść jakoś w kod przetwarzający dane wejściowe.
 
   Zaczynamy przetwarzać strumień - pomijamy pierwszą linię (skip(int)), tniemy (mapujemy) linię na kolumny prostym String.split("\t") a następnie mapujemy tablicę String'ów na nasz POJO podając po prostu metodę która ma zostać użyta do konwersji. Wygląda jak C++, prawda? ;) Jako bonus - użyłem nową metodę Objects.requireNonNull() która rzuci wyjątek gdy argumenty metody nie będą spełniały kryteriów.
 
   Teraz mamy już strumień POJO z posegregowanymi danymi - wystarczy przefiltrować dane na różne sposoby oraz pogrupować wyniki miesiącami, co można zrobić tak:
 
 {% highlight java %}	
+
   public List<LocalDate> findTheGoodTimes(Path path, 
 			Function<Stream<WindDataRow>, Stream<WindDataRow>> extraFilterFunc, 
 			int startHour, int endHour, double minWind, double minPerc) throws IOException, ParseException {
@@ -162,36 +164,32 @@ Teraz zabierzmy się za pobranie danych:
 
 {% endhighlight %}
 
-Mamy tutaj najpierw zaaplikowaną arbitralną funkcję (nie wiemy potencjalnie co ona robi) która przefiltruje (chociaż może zrobić ze strumieniem wszystko byle typy wej/wyj się zgadzały...) a następnie filtry z wyrażeń lambda, które obliczają średnią (oczywiście z użyciem Stream API) z danych dot. wiatru i wilgotności w zadanych godzinach i porównują wynik z warunkami minimalnymi. Mamy już podzbiór danych, które spełniają kryteria, teraz trzeba je zebrać ( .collect() ), grupując miesiącami, co ułatwia predefiniowany Collectors.gruppingBy(...). Zbiór kluczy z wynikowej mapy (czyli miesiące) sortujemy i zamieniamy na listę, która jest końcowym wynikiem. W ramach podglądu - dodałem wywołanie .peek(...) które jest sposobem na zrobienie czegoś z pośrednim wynikiem przetwarzania strumienia, bez jego modyfikacji - z reguły do logowania i debugowania. 
+Mamy tutaj najpierw użycie arbitralnego wyrażenia Predicate przekazanego 'z góry' (nie wiemy i nie musimy wiedzieć co potencjalnie on robi) oraz kolejno filtry z wyrażeń lambda, które obliczają średnią (oczywiście z użyciem Stream API) z danych dot. wiatru i wilgotności w zadanych godzinach i porównują wynik z warunkami minimalnymi. Mamy już podzbiór danych, które spełniają kryteria, teraz trzeba je zebrać ( .collect() ), grupując miesiącami, co ułatwia predefiniowany Collectors.gruppingBy(...). Zbiór kluczy z wynikowej mapy (czyli miesiące) sortujemy i zamieniamy na listę, która jest końcowym wynikiem. W ramach podglądu - dodałem wywołanie .peek(...) które jest sposobem na zrobienie czegoś z pośrednim wynikiem przetwarzania strumienia, bez jego modyfikacji - z reguły do logowania i debugowania (można w zasadzie wszystko, ale istotniejsze 'side-effects' spowodują komplikacje przy próbie równoległego wykonania...). 
 
 
+  Przydałoby się jakoś ten cały nowoczesny kod uruchomić, więc dodam klasę z metodą main() i zdefiniuję sobie jeszcze dodatkową funkcję (Predicate) który przefiltruje strumień naszych POJO pod kątem zadanego przedziału czasowego. Oczywiście przekażę tą funkcję jako zwykły parametr (ot tak, bo mogę!). Niestety, typy generyczne powodują, że nie wygląda to idealnie przejrzyście, ale coś za coś...:
 
-  Przydałoby się jakoś ten cały nowoczesny kod uruchomić, więc dodam klasę z metodą main() i zdefiniuję sobie jeszcze dodatkową funkcję która przefiltruje strumień naszych POJO pod kątem zadanego przedziału czasowego. Oczywiście przekażę tą funkcję jako zwykły parametr (ot tak, bo mogę!). Niestety, typy generyczne powodują, że nie wygląda to idealnie przejrzyście, ale coś za coś...:
 {% highlight java %}
 
-public class WeatherStatsAnalyzer {
-
 	public static void main(String[] args) throws IOException, ParseException {
-		final LocalDate startDate = LocalDate.of(2013, Month.DECEMBER, 31);
-		final LocalDate endDate = LocalDate.of(2014, Month.JULY, 1);
-
-		final int startHour = 9;
-		final int endHour = 18;
-
-		Function<Stream<WindDataRow>, Stream<WindDataRow>> filterByTimeFunc = 
-				dataStream -> dataStream.filter(e -> (e.date.isAfter(startDate)) )
-														   .filter(e -> e.date.isBefore(endDate)  );
-
 		
-
+		LocalDate startDate = LocalDate.of(2013, Month.DECEMBER, 31);
+		LocalDate endDate = LocalDate.of(2014, Month.JULY, 1);
+		
+		final TimeSpanHours hours = new TimeSpanHours(9, 18);
+		
+		
+		Predicate<WindDataRow> filterByTimePredicateFunc = 
+				e  -> e.date.isAfter(startDate) && e.date.isBefore(endDate);
+		
 		new WeatherStatsAnalyzer().findTheGoodTimes(
-  	   Paths.get("wg_data.csv"), filterByTimeFunc, startHour, endHour, 16, 0.2
+				Paths.get("wg_data.csv"), filterByTimePredicateFunc, hours, 16, 0.2
 		);
-		
 	}
-}
+
 {% endhighlight %}
 
+(TimeSpanHours to tylko małe 'opakowanie' dla przedziału czasowego w godzinach)
 
 Wynik uruchomienia to: 
 
@@ -207,7 +205,7 @@ wypisane na konsoli (dzięki wywołaniu .peek(...) ). Gotowe :)
 
   Podsumowując, zadanie nie było bardzo skomplikowane i prawdopodobnie szybciej i łatwiej byłoby wrzucić dane do relacyjnej bazy danych jednym poleceniem z poziomu Bash'a i wyciągnąć dane jednym, choć dosyć złożonym, zapytaniem SQL. Z tą różnicą, że w powyższym przypadku nie ogranicza nas ilość danych wejściowych. Całe przetwarzanie odbywa się linia po linii. Bardzo łątwo jest zmodyfikować kod tak, żeby dane nie były pobierane z pliku tylko z jakiegokolwiek źródła - np. WebService poprzez podstawienie innego strumienia zamiast naszego 'linesStream'. Nie musimy w ogóle dotykać kodu który przetwarza później dane (i zrobić strumień parametrem metody). 
   Możemy też, w przypadku gdy źródło jest wolne - dodać magiczne słowko 'parallel' gdy tworzymy strumień i przetwarzanie zostanie wykonane na wszystkich dostępnych rdzeniach CPU. Tutaj uwaga: należy być ostrożnym w przypadku gdy nie jest to program samodzielny i pulą wątków zarządza np. web server - każdy wątek przetwarzający request zacznie sam mnożyć wątki... i możemy osiągnąć skutek odwrotny do zamierzonego.
-  W powyższym rozwiązaniu jest jednakże pewne silne podobieństwo do języka SQL - wynika to z faktu, że kod stał się dużo bardziej deklaratywny niż imperatywny. W SQL nie mówimy przecież jak silnik BD ma iterować po encjach, jak obliczać średnią czy ma to robić na 1 czy wielu wątkach, po prostu mówimy czego oczekujemy. Tak jak, w dużej mierze, w naszym przykładzie.
+  W powyższym rozwiązaniu jest jednakże pewne silne podobieństwo do języka SQL - wynika to z faktu, że kod stał się dużo bardziej deklaratywny niż imperatywny. W SQL nie mówimy przecież jak silnik BD ma iterować po encjach, jak obliczać średnią czy ma to robić na 1 czy wielu wątkach, po prostu mówimy czego oczekujemy. Tak jak, w dużej mierze, w naszym przykładzie. Zadziwiające, że manipulowaliśmy na kilku tablicach, listach i mapach i nie użyliśmy ani razu pętli programowej (for/while), prawda?
 
  Programiści używający chociażby Pythona uśmiechną się teraz z politowaniem, ale, moim skromnym zdaniem, dla Javy to z pewnością jest rewolucja. Możliwość swobodnego przekazywania zachowania a nie tylko samych danych ma szansę mocno zmienić styl programowania w Javie nie tylko w detalach ale również na poziomie struktury aplikacji.
   Ja osobiście widzę wzorce projektowe jako usystematyzowane sposoby na obejście niedoskonałości i ograniczeń konkretnego języka programowania. Mam tu na myśli wzorce dotyczące konstrukcji programów, nie bardziej ogólne dot. architektury (np. MVC). Niestety, trzeba przyznać, że Java ma wyjątkowo dużo wzorców projektowych, co wcale nie jest konsekwencją wspaniale rozwiniętego środowiska programistów, ale właśnie bardzo ograniczonego (sztywnego) języka.
