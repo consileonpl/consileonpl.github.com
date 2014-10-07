@@ -26,7 +26,7 @@ poza tym, jest też kilka innych, moim zdaniem istotnych, ale już mniej znanych
  - bezpieczne generowanie liczb losowych (SecureRandom.getInstanceStrong()) - bardzo istotne w przypadku szyfrowania
 - Optional<T> - sposób na jawne określenie czy zmienna może być null - (żegnaj NullPointerException?)
 
-Oczywiście jest tego trochę wiecej (w samym JVM), ale z punktu widzenia programisty patrzącego na możliwości języka, to byłyby rzeczy najbardziej istotne.
+Oczywiście jest tego trochę więcej (w samym JVM), ale z punktu widzenia programisty patrzącego na możliwości języka, to byłyby rzeczy najbardziej istotne.
 
   OK, na pierwszy rzut oka wygląda to podobnie jak ewolucja w przypadku wcześniejszych wersji - 1.4, 1.5, 1.6 czy 1.7. Trochę nowych rzeczy, trochę 'syntactic sugar', sporo programistów się ucieszy, paru zdenerwuje (vide: runtime generics type erasure... wrr) - nic wielkiego. Czy na pewno?
   Java dotychczas była postrzegana jako język w którym króluje paradygmat OO - przekazywanie zachowania było, może nie niemożliwe, ale bardzo uciążliwe i wymagało niepotrzebnego mnożenia bytów (klas). Kod robił się zagmatwany i nieczytelny. Z pewnością wprowadzanie elementów programowania funkcyjnego nie było czymś naturalnym - takie rozwiązania stosowane są raczej w odosobnionych przypadkach, kiedy jest to oczywisty wybór.
@@ -88,6 +88,7 @@ class WindDataRow {
 	}
 }
 {% endhighlight %}
+
   Wszystko wygląda dosyć standardowo, za wyjątkiem użycia stream'ów do konwersji strumienia String'ów na tablice int[] i double[].Użyty został także nowy lepszy (w końcu!) typ LocalDate dla reprezentacji czasu oraz tread-safe DateTimeFormatter zamiast popularnego SimpleDateFormat (który z jakiegoś niezrozumiałego powodu jest wewnętrznie modyfikowalny i ma stan).
 
 Teraz zabierzmy się za pobranie danych:
@@ -164,7 +165,7 @@ Teraz zabierzmy się za pobranie danych:
 
 {% endhighlight %}
 
-Mamy tutaj najpierw użycie arbitralnego wyrażenia Predicate przekazanego 'z góry' (nie wiemy i nie musimy wiedzieć co potencjalnie on robi) oraz kolejno filtry z wyrażeń lambda, które obliczają średnią (oczywiście z użyciem Stream API) z danych dot. wiatru i wilgotności w zadanych godzinach i porównują wynik z warunkami minimalnymi. Mamy już podzbiór danych, które spełniają kryteria, teraz trzeba je zebrać ( .collect() ), grupując miesiącami, co ułatwia predefiniowany Collectors.gruppingBy(...). Zbiór kluczy z wynikowej mapy (czyli miesiące) sortujemy i zamieniamy na listę, która jest końcowym wynikiem. W ramach podglądu - dodałem wywołanie .peek(...) które jest sposobem na zrobienie czegoś z pośrednim wynikiem przetwarzania strumienia, bez jego modyfikacji - z reguły do logowania i debugowania (można w zasadzie wszystko, ale istotniejsze 'side-effects' spowodują komplikacje przy próbie równoległego wykonania...). 
+Mamy tutaj najpierw użycie arbitralnego wyrażenia Predicate przekazanego 'z góry' (nie wiemy i nie musimy wiedzieć co potencjalnie ono robi) oraz kolejno filtry z wyrażeń lambda, które obliczają średnią (oczywiście z użyciem Stream API) z danych dot. wiatru i wilgotności w zadanych godzinach i porównują wynik z warunkami min/max. Mamy już podzbiór danych, które spełniają kryteria, teraz trzeba je zebrać ( .collect() ), grupując miesiącami, co ułatwia predefiniowany Collectors.gruppingBy(...). Zbiór kluczy z wynikowej mapy (czyli miesiące) sortujemy i zamieniamy na listę, która jest końcowym wynikiem. W ramach podglądu - dodałem wywołanie .peek(...) które jest sposobem na zrobienie czegoś z pośrednim wynikiem przetwarzania strumienia, bez jego modyfikacji - z reguły do logowania i debugowania (można w zasadzie wszystko, ale 'side-effects' spowodują komplikacje przy próbie równoległego wykonania...).
 
 
   Przydałoby się jakoś ten cały nowoczesny kod uruchomić, więc dodam klasę z metodą main() i zdefiniuję sobie jeszcze dodatkową funkcję (Predicate) który przefiltruje strumień naszych POJO pod kątem zadanego przedziału czasowego. Oczywiście przekażę tą funkcję jako zwykły parametr (ot tak, bo mogę!). Niestety, typy generyczne powodują, że nie wygląda to idealnie przejrzyście, ale coś za coś...:
