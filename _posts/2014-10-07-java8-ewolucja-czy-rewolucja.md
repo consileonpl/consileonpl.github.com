@@ -81,7 +81,7 @@ class WindDataRow {
 
 		int[] wind = Arrays.stream(columns).skip(1).limit(24)
                                        .mapToInt(Integer::valueOf).toArray();
-		double percip[] = Arrays.stream(columns).skip(24)
+		double percip[] = Arrays.stream(columns).skip(25)
                                             .mapToDouble(Double::valueOf).toArray();
 
 		return new WindDataRow(date, wind, percip);
