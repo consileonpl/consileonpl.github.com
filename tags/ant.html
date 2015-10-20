@@ -1,0 +1,14 @@
+---
+layout: default
+title: "Consileon PL - DevBlog"
+description: ""
+---
+
+<div id="entries">
+  <h1>Kategoria "ant":</h1>
+  <ul>
+    {% for post in site.categories.ant %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
