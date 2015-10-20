@@ -32,6 +32,11 @@ h3 {
   margin-bottom: 0.25em;
 }
 
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
 a {
   color: #007f7f;
   text-decoration: none;
@@ -113,7 +118,7 @@ blockquote em {
 }
 
 #header h2 a {
-  color: #475258;  
+  color: #475258;
 }
 
 #logo a {
@@ -239,10 +244,10 @@ blockquote em {
 
 .meta {
   margin-bottom: 2em;
-  border-top-color: #C9C9C9; 
+  border-top-color: #C9C9C9;
   border-top-style: solid;
-  border-top-width: 1px; 
-  border-bottom-color: #C9C9C9; 
+  border-top-width: 1px;
+  border-bottom-color: #C9C9C9;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   background-color: #F1F1F1;
@@ -261,7 +266,7 @@ blockquote em {
 }
 
 .bio {
-  border-top: 1px solid #C9C9C9; 
+  border-top: 1px solid #C9C9C9;
   border-bottom: 1px solid #c9c9c9;
   background-color: #F1F1F1;
   padding: 20px;

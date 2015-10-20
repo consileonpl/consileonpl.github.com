@@ -1,0 +1,391 @@
+---
+layout: post
+title:  "Gradle and groovy"
+date:   2015-10-20
+categories: gradle maven ant gradle-properties-yaml-plugin gradle-dependency-lock-plugin
+---
+
+-> ![groovy-logo](/images/groovy_logo.png =125x) ![gradle-logo](/images/gradle_logo.png =250x) ![groovy-logo](/images/groovy_logo.png =125x) <-
+
+Gradle is a while on the market. That's a fact. But as it is with all those new cool stuff, we keep on using "old", bulletproof, production-proven Maven.
+But quite recently, a small internal project came up and we decided, it is perfect opportunity to try out Gradle.
+
+By just opening [User Guide - Introduction][gradle-intro] you would learn that Gradle is flexible like `Ant`,
+supports build-by-convention like `Maven`, uses powerful dependency management based on `Ivy` and last but not least uses `Groovy` instead of `XML`.
+That sounds more than promising, thats sounds just like election kind of promise promise (yup - as I write this post, parliamentary election in Poland is just around the corner).
+
+So what really makes Gradle unique?
+
+### Tasks oriented “Ant alike” script ###
+
+First feature I wanted to try was ability to create single *task* without having to bind it to some phase of lifecycle.
+With all good stuff that comes with Maven, impossibility of running single task, like `populate my local DB` was pretty anoying<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.
+Here Gradle is pretty awesome. Creating tasks, making them depend on each other or simply ordering them works great.
+What's more, it could be evaluated on the fly not just hardcoded!
+
+{% highlight groovy %}
+task taskX << {
+    println 'taskX'
+}
+
+taskX.dependsOn {
+    tasks.findAll { task -> task.name.startsWith('lib') }
+}
+
+task lib1 {
+    doLast {
+      println 'lib1'
+    }
+}
+
+task lib2 << {
+    println 'lib2'
+}
+
+lib1.mustRunAfter lib2
+
+task notALib << {
+    println 'notALib'
+}
+{% endhighlight %}
+
+Running `taskX` above will result in following (expected) order:
+
+0. lib2
+0. lib1
+0. taskX
+
+Well, if this one works, let's take some real example and set up DbUnit<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>.
+
+{% highlight groovy %}
+dependencies {
+    dbunit 'org.dbunit:dbunit'
+    dbunit 'ch.qos.logback:logback-classic'
+}
+
+ant.taskdef(name: "dbunit",
+  classname: "org.dbunit.ant.DbUnitTask",
+  classpath: configurations.dbunit.asPath)
+
+def datatypeFactoryValue = "org.dbunit.ext.mysql.MySqlDataTypeFactory"
+
+task dataInsertDev {
+    description = 'Insert XXXXX development data'
+    group = 'DbUnit'
+    mustRunAfter dataInsertProd
+    doLast {
+        def insertOpDefault = [type: "INSERT", format: "flat"]
+        ant.dbunit(
+            driver: project.properties.hibernateConnectionDriverClass,
+            url: project.properties.hibernateConnectionUrl,
+            userid: project.properties.hibernateConnectionUsername,
+            password: project.properties.hibernateConnectionPassword,
+            classpath: configurations.jdbc.asPath) {
+            dbConfig() {
+                property(name: "datatypeFactory", value: datatypeFactoryValue)
+                feature(name: "http://[...]/batchedStatements", value: true)
+            }
+            operation( [*: insertOpDefault, src: "${devSchema}/aaa.xml"] )
+            operation( [*: insertOpDefault, src: "${devSchema}/bbb.xml"] )
+        }
+    }
+}
+{% endhighlight %}
+
+Writing this did not go very smoothly, took me some long minutes to figure out how to use Gradle DSL, but finally it worked!
+
+`*:` [groovy spread operator][groovy-spread] was used just to make code block smaller and fit my screen.
+
+### Useful like Maven ###
+
+Now it was a time to convert our Maven project into Gradle one. I had some trouble understanding [Maven dependency scope][maven-scope]
+vs.[Gradle dependency configurations][gradle-scope] (and btw. Gradle concept turns out to be much more powerful and usable).
+
+A goal was to have Maven compile lifecycle, JaCoCo and SonarQube running.
+
+First few minutes and already a first challenge ;) It seems that Maven's `<project><dependencyManagement>` used normally in parent pom for multi-module project is not there.
+
+But wait, I was not the first one to miss it and so there is already proper plugin: [io.spring.dependency-management][spring-dependency-management].
+JaCoCo and SonarQube are plugins too.
+
+{% highlight groovy %}
+plugins {
+    id 'io.spring.dependency-management' version '0.5.2.RELEASE'
+}
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'sonar-runner'
+
+dependencyManagement {
+    imports {
+        mavenBom "groupId:bomArtifactId:version"
+    }
+    dependencies {
+        dependency "groupId:artifactId:version"
+    }
+}
+
+dependencies {
+    compile "groupId:artifactId"
+}
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+sonarRunner {
+    toolVersion = '2.4'
+    sonarProperties {
+        property "sonar.language", "java"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.host.url", "http://our.internal.server"
+        property "sonar.login", "user"
+        property "sonar.password", "password"
+        property "sonar.jdbc.url", "jdbc:mysql://database:3306/sonarqube[...]"
+        property "sonar.jdbc.username", "sonarname"
+        property "sonar.jdbc.password", "sonarpass"
+        property "sonar.scm.provider", "git"
+    }
+}
+{% endhighlight %}
+
+Looks pretty simple but what is important, gives you *clean*, *test*, *build* and *assemble* tasks out-of-the-box. So common Maven usage is covered.
+
+Exporting to Maven, Ivy, Bintray repositories is covered by appropriate plugins too.
+
+### Custom 'inline' plugins ###
+
+What I really like the most about Gradle is its flexibility. If you need any custom behaviour, just include it in script itself. It is Groovy after all!
+Moreover Gradle gives you much more elegant way to do it. It is enough to add [buildSrc][gradle-buildSrc] folder to your project and that is all you need to write local plugins.
+
+OK, let's test it. For the project itself, we are using [Redmine][redmine-main] to track issues and we track in which version the issue is fixed. Let's generate release notes in JSON format for it. All it takes is to create *a project* in *buildSrc* folder.
+
+Plugin `build.gradle`:
+{% highlight groovy %}
+apply plugin: 'groovy'
+repositories {
+    maven {
+         jcenter()
+    }
+}
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.2'
+}
+{% endhighlight %}
+
+
+Plugin source code itself:
+{% highlight groovy %}
+package pl.gradle.hrtool.changelog
+
+import groovy.json.JsonOutput
+import groovyx.net.http.HTTPBuilder
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.logging.Logger
+import org.gradle.api.logging.Logging
+
+import static groovyx.net.http.ContentType.XML
+import static groovyx.net.http.Method.GET
+
+class RedmineChangelogPlugin implements Plugin<Project> {
+  Logger logger = Logging.getLogger(RedmineChangelogPlugin)
+
+  void apply(Project project) {
+    // Add the 'redmineChangelog' extension object
+    project.extensions
+        .create("redmineChangelog", RedmineChangelogPluginExtension)
+    // Add a task that uses the configuration
+    def generateChangelogTask = project.task('generateChangelog') << {
+      def changelogProps = project.redmineChangelog
+      new HTTPBuilder(changelogProps.baseUrl).request(GET, XML) { req ->
+
+        //prepare local variables
+        def localVersion = changelogProps.version ?: project.version
+        def issuesUri = 'issues.xml?project_id=43' +
+            '&offset=0&limit=10000' +
+            '&status_id=closed&fixed_version_id='
+        def versionId = changelogProps.fixedVersions[localVersion]
+
+        //populate request
+        uri.path = issuesUri + versionId
+        headers.'X-Redmine-API-Key' = changelogProps.apiKey
+        response.success = { resp, xml ->
+
+          //process response
+          assert resp.status == 200
+
+          def result = [:]
+          result.version = localVersion
+          result.issues = [:]
+
+          List<Object> trackers = getIssueTypes(xml)
+          converIssuesToLocalList(trackers, result, xml)
+
+          def outputFile = project.file(changelogProps.outputFile)
+          writeAsJson(result, outputFile)
+
+          logger.quiet("Changelog version is set to ${result.version}")
+          logger.quiet("Changelog generated to ${outputFile.absolutePath}")
+        }
+      }
+    }
+    generateChangelogTask.description 'Retrieves release notes from Redmine'
+    generateChangelogTask.group 'Changelog'
+  }
+
+  /**
+   * Grab issues from XML, sort them by issue type and put it down
+   * as custom map for latter JSONising.
+   */
+  def void converIssuesToLocalList(List<Object> trackers, result, xml) {
+    // Prepare local closures
+    def priority = { issue ->
+      issue.priority.@id.text() as long
+    }
+    def id = { issue ->
+      issue.id.text() as long
+    }
+    def issueSort = { i1, i2 ->
+      priority(i1) <=> priority(i2) ?: id(i1) <=> id(i2)
+    }
+    def issueToMap = { issue ->
+      [
+          id      : "${issue.id}",
+          priority: "${issue.priority.@name}",
+          subject : "${issue.subject}",
+          status  : "${issue.status.@name}"
+      ]
+    }
+
+    // Grab and convert issues
+    trackers.each { tracker ->
+      result.issues[tracker] = []
+      def issues = xml.'*'
+          .findAll { node -> node.tracker.@name == tracker }
+          .list()
+          .sort(issueSort)
+      issues.each { issue ->
+        result.issues[tracker] += issueToMap(issue)
+      }
+    }
+  }
+
+  /**
+   * Get all issue types - they are called trackers in Redmine
+   */
+  def List<Object> getIssueTypes(xml) {
+    xml.issue.'*'
+        .findAll { node -> node.name() == 'tracker' }*.@name
+        .unique()
+        .sort()
+  }
+
+  /**
+   * Write it down JSON style
+   */
+  def writeAsJson(LinkedHashMap result, File outputFile) {
+    def json = JsonOutput.toJson(result)
+    outputFile.withWriter('utf-8') { writer ->
+      writer.write JsonOutput.prettyPrint(json)
+    }
+  }
+}
+
+/**
+ * Gradle plugin DSL
+ */
+class RedmineChangelogPluginExtension {
+  def String baseUrl
+  def String apiKey
+  def String outputFile
+  def fixedVersions = [:]
+  def version
+}
+{% endhighlight %}
+
+Plugin usage in project's `build.gradle`.
+{% highlight groovy %}
+apply plugin: 'redmineChangelog'
+
+redmineChangelog {
+    baseUrl 'https://redmine.consileon.pl/'
+    apiKey 'aąbcćxyz'
+    outputFile  "${project.properties.projectDir}/src/app/changelog.json"
+    fixedVersions ((1..10).collectEntries({["1.0.${it}", "${it}"]}))
+    version '1.0.0'
+}
+{% endhighlight %}
+
+For me it is fine. I never wrote a plugin for Maven so I cannot compare it but this one was really straightforward.
+
+### Gradle way build properties and gradle-properties-yaml-plugin ###
+
+[Configuring the build environment][gradle-build] in Gradle is quite similar to the way Maven does it. In simplest scenario you have properties defined in `gradle.properties` in your project directory and you can overwrite it with the one defined in `Gradle user home`.
+
+Seems to be OK.
+
+Default environment properties are checked into Git (or something else) but you can easily redefine it to suit your machine. But unfortunately this is a truth only for Maven and its profiles. What’s wrong with Gradle-way? `Gradle.properties` is not `settings.xml` - I mean it is not XML, but a flat property file. There are no profiles you could switch, no [inline property resolving][maven-settings], no [server credentials][maven-server] and no [password encryption][maven-pass]!
+
+Let’s assume I keep an IP of my database in property `hibernate.connection.host`. Moreover I do it in all my projects.
+
+So what would I do switching from project to project or from local [Vagrant][vagrant-main] to *not-so-local non-Vagrant* machine? Should I keep copies of `~/.gradle/gradle.properties` for every possible project and environment permutation?
+
+**For me, this is the place Gradle must definitely improve.**
+
+The best I could get was [Gradle Properties Plugin][gradle-props-plugin] from Steven C. Saliman. Nice plugin but still not enough. But look at the source code - according to [Cloc][cloc-main] it is 258 lines of code (excluding tests)!
+
+258 lines? This is the effort I can risk. So I spent a day on writing and publishing my own [yaml property plugin][gradle-yaml-plugin]. Why YAML? I used it for [Puppet][puppet-main], I spotted it in [Grails 3][grails-main]. I decided to write it in similar way as Grails does, extending this by something Maven-profiles alike. To be honest, I haven't used my own plugin in production yet, but what you should see here is, how easy it is to extend Gradle to fit your needs.
+
+### Gradle for JS ###
+
+Finally, Gradle is not just for `java` and `jvm` based languages. You could easily find some promising plugins for JavaScript also. Just take a look at [Asset Pipeline Core][gradle-asset-plugin], [Javascript Plugin][gradle-js-plugin], [CSS Plugin][gradle-css-plugin], [Dependency Lock Plugin][gradle-dep-loc-plugin] and [others][gradle-plugins].
+
+### Final word ###
+
+-> ![keep-calm-and-never-stop-learning](/images/kcansl.png) <-
+
+
+### Footnotes ###
+
+<ol>
+<li id="fn:1"><p>I'm aware that with help of profiles or combining Ant with Maven (where Ant takes from Maven properties and classpaths), it is possible to create something <em>task alike</em>. <a href="#fnref:1" class="reversefootnote">↩</a></p></li>
+<li id="fn:2"><p>Yes, we do use <a href="http://dbunit.sourceforge.net/">DbUnit</a> for populating database with various test data. <a href="#fnref:2" class="reversefootnote">↩</a></p></li>
+</ol>
+
+{% include bio_mariusz_wiktorczyk_en.html %}
+
+[cloc-main]: http://cloc.sourceforge.net
+[gradle-asset-plugin]: https://github.com/bertramdev/asset-pipeline-core/
+[gradle-build]: https://docs.gradle.org/current/userguide/build_environment.html
+[gradle-buildSrc]: https://docs.gradle.org/current/userguide/organizing_build_logic.html#sec:build_sources
+[gradle-dep-loc-plugin]: https://github.com/nebula-plugins/gradle-dependency-lock-plugin
+[gradle-css-plugin]: https://github.com/eriwen/gradle-css-plugin
+[gradle-intro]: https://docs.gradle.org/current/userguide/introduction.html
+[gradle-js-plugin]: https://github.com/eriwen/gradle-js-plugin
+[gradle-plugins]: https://plugins.gradle.org/
+[gradle-props-plugin]: https://github.com/stevesaliman/gradle-properties-plugin
+[gradle-scope]: https://docs.gradle.org/current/userguide/artifact_dependencies_tutorial.html#configurations
+[gradle-yaml-plugin]: https://github.com/mwiktorczyk/gradle-properties-yaml-plugin
+[grails-main]: https://grails.org/
+[groovy-spread]: http://www.groovy-lang.org/groovy-dev-kit.html#_spread_operator
+[maven-pass]: https://maven.apache.org/guides/mini/guide-encryption.html
+[maven-scope]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Scope
+[maven-server]: https://maven.apache.org/settings.html#Servers
+[maven-settings]: https://maven.apache.org/examples/injecting-properties-via-settings.html
+[puppet-main]: https://puppetlabs.com/
+[redmine-main]: http://www.redmine.org/
+[spring-dependency-management]: https://github.com/spring-gradle-plugins/dependency-management-plugin
+[vagrant-main]: https://www.vagrantup.com/
+
