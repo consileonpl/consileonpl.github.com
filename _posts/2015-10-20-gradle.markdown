@@ -3,6 +3,7 @@ layout: post
 title:  "Gradle and groovy"
 date:   2015-10-20
 categories: gradle maven ant
+facebookImage: /images/mariusz_wiktorczyk.jpg
 ---
 
 -> ![groovy-logo](/images/groovy_logo.png =125x) ![gradle-logo](/images/gradle_logo.png =250x) ![groovy-logo](/images/groovy_logo.png =125x) <-
