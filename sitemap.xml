@@ -1,18 +1,18 @@
 ---
-layout: nil
+layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
-  <url> 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
     <loc>http://consileonpl.github.com/</loc>
-    <changefreq>daily</changefreq> 
-    <priority>1</priority> 
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
   </url>
   <url>
     <loc>http://consileonpl.github.com/about/</loc>
     <changefreq>weekly</changefreq>
-  </url> 
-  {% for page in site.posts %}  
+  </url>
+  {% for page in site.posts %}
   <url>
     <loc>http://consileonpl.github.com/{{ page.url }}</loc>
     <lastmod>{{ page.date | date: "%Y-%m-%d" }}</lastmod>

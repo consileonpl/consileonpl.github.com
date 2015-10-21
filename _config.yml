@@ -1,9 +1,8 @@
---- 
+---
 permalink: /:year/:month/:day/:title
 lsi: false
 markdown: rdiscount
-pygments: true
+highlighter: pygments
 comments: true
 pretty_style: html_extension
-auto: true
-server_port: 4000
+port: 4000
