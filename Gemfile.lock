@@ -64,8 +64,8 @@ PLATFORMS
 
 DEPENDENCIES
   iconv
-  jekyll (= 2.4.0)
-  rdiscount (= 2.1.7)
+  jekyll
+  rdiscount
 
 BUNDLED WITH
    1.10.4
