@@ -1,0 +1,78 @@
+@page {
+  size: landscape;
+  margin: 2cm;
+}
+
+.bio {
+  background-color: #fff;
+}
+
+#sidebar, #footer {
+  display: none;
+}
+
+#container, #main, #sidebar, #content {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  vertical-align: baseline;
+  width: auto;
+  float: none !important;
+  background: transparent;
+}
+
+.k, .kd, .kt, .kn, .nb, .nt, .kc {
+  color: #585858;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.nc, .no {
+  color: #585858;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.nf {
+  color: #585858;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.s, .s1, .s2, .sh, .sr {
+  color: #585858;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.c, .c1, .x {
+  color: #585858;
+  font-weight: normal;
+  font-style: normal;
+}
+
+code.java .nd {
+  color: #585858;
+  font-weight: normal;
+  font-style: normal;
+}
+
+code {
+  background-color: #fff;
+  border: none;
+}
+
+pre {
+  color: #585858;
+  background-color: #fff;
+  border: 1px solid #CCC;
+}
+
+pre code {
+  background-color: #fff;
+}
