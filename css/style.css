@@ -183,6 +183,7 @@ blockquote em {
   margin-left: 25px;
   padding: 0 15px;
   max-width: 70%;
+  width: 70%;
 }
 
 #sidebar {
