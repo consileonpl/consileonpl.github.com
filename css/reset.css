@@ -43,7 +43,7 @@ table {
 
 caption,th,td {
   text-align: left;
-  font-weight: normal;
+  font-weight: 200;
 }
 
 blockquote,q { quotes:none }
