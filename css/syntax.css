@@ -1,6 +1,6 @@
 .k, .kd, .kt, .kn, .nb, .nt, .kc {
     color: #c9913a;
-    font-weight: bold;
+    font-weight: 200;
 }
 
 .nc, .no {
@@ -25,15 +25,15 @@ code.java .nd {
 }
 
 code.xml .nt {
-    font-weight: normal;
+    font-weight: 200;
 }
 
 code { 
   border-radius:3px;
   background-color: #F8F8F8;
   border: 1px solid #CCC; 
-  padding: 0 3px 0 3px;
-  font-size: 85%;
+  padding: 3px 3px 3px 3px;
+  font-size: 120%;
 }
 
 pre {
