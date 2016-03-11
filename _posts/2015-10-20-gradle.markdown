@@ -5,8 +5,8 @@ date:   2015-10-20
 categories: gradle maven ant
 facebookImage: /images/mariusz_wiktorczyk.jpg
 ---
-
--> ![groovy-logo](/images/groovy_logo.png =125x) ![gradle-logo](/images/gradle_logo.png =250x) ![groovy-logo](/images/groovy_logo.png =125x) <-
+![groovy-logo](/images/groovy_logo.png){: width: "125px" } ![gradle-logo](/images/gradle_logo.png){: width: "250px" } ![groovy-logo](/images/groovy_logo.png){: width: "125px" }
+{: style="text-align: center"}
 
 Gradle is a while on the market. That's a fact. But as it is with all those new cool stuff, we keep on using "old", bulletproof, production-proven Maven.
 But quite recently, a small internal project came up and we decided, it is perfect opportunity to try out Gradle.
@@ -355,7 +355,8 @@ Finally, Gradle is not just for `java` and `jvm` based languages. You could easi
 
 ### Final word ###
 
--> ![keep-calm-and-never-stop-learning](/images/kcansl.png) <-
+![keep-calm-and-never-stop-learning](/images/kcansl.png)
+{: style="text-align: center"}
 
 
 ### Footnotes ###
