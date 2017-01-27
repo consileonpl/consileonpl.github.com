@@ -1,7 +1,7 @@
 ---
 layout: post
 title: JSON Server - testowe REST API w kilka minut
-categories: [javascript, tools, testowanie]
+categories: [Node.js, tools, testowanie]
 ---
 
 Czasami chciałbyś od razu rozpocząć pracę na frontendzie aplikacji, ale okazuje się, że musisz czekać, aż zespół dopowiedziany za backend wystawi działające API.
