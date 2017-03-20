@@ -32,3 +32,5 @@ Odseparowanie transakcji on-line od transakcji wsadowych, w taki sposób aby nie
 ## Realizacja
 
 Utworzenie oddzielnej aplikacji EAR, do której przeniesiono serwis odpowiedzialny za uruchamianie procesów wsadowych. Definicja PU, znajdująca się we współdzielonym module encji, została sparametryzowana (wartości ```jboss.entity.manager.factory.jndi.name``` i ```jta-data-source``` ustawiane są ze zmiennych środowiskowych).
+
+{% include bio_pawel_kaczor.html %}
