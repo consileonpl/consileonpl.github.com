@@ -625,6 +625,7 @@ Teraz powinieneś być w stanie szybko i łatwo stworzyć własne mock API i dod
 
 
 Do pracy nad artykułem wykorzystano biblioteki i narzędzia w następujących wersjach:
+
 * Node.js: 6.9.4 LTS
 * Chrome: 55
 * json-server: 0.9.4
